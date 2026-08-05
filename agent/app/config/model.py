@@ -16,5 +16,4 @@ def create_model() -> ChatGoogleGenerativeAI:
 
     return ChatGoogleGenerativeAI(
         model="gemini-3.6-flash",
-        temperature=0,
     )
