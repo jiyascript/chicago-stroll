@@ -4,9 +4,8 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 
-# config.py is inside agent/app/.
-# parents[1] points to the agent/ directory.
-ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
+
+ENV_PATH = Path(__file__).resolve().parents[2] / ".env"
 
 # Load GOOGLE_API_KEY and LangSmith settings.
 load_dotenv(ENV_PATH)
