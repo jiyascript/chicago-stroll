@@ -2,7 +2,7 @@ import datetime
 from app.schemas import TripRequest, TripRequestUpdate
 from app.services.trip_request import merge_trip_request
 
-def test_merge_trip_request_preserves_existing_values() => None:
+def test_merge_trip_request_preserves_existing_values() -> None:
     """A partial update should not erase previously known details."""
 
     current = TripRequest(

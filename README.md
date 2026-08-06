@@ -1,4 +1,4 @@
-# Chicago Stroll
+# Chicago Stroll   ༘⋆༄.°⋆
 
 An AI-powered Chicago itinerary planner built with LangChain, LangGraph,
 and LangSmith.

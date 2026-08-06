@@ -9,7 +9,7 @@ from app.state import PlannerState
 def update_request(state: PlannerState)->dict:
     current_request = state.get("trip_request")
     if current_request is None:
-        raise ValueError("trip_request must be created applying an update.")
+        raise ValueError("trip_request must exist before applying an update.")
     model = create_model()
     update_model = model.with_structured_output(TripRequestUpdate)
 
