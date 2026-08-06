@@ -3,3 +3,4 @@ langchain-google-genai
 langsmith
 python-dotenv
 pydantic
+httpx

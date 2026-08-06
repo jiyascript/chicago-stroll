@@ -1,19 +1,12 @@
-"""Place schema for Chicago Stroll."""
-
+"""LLM-generated planning metadata for a place."""
 from typing import Literal
-
 from pydantic import BaseModel, ConfigDict, Field
 
 
-class Place(BaseModel):
-    """Structured representation of a Chicago place or experience."""
+class PlaceEnrichment(BaseModel):
+    """Planner-specific attributes inferred for a Chicago place."""
 
     model_config = ConfigDict(extra="forbid")
-
-    name: str = Field(
-        description="The place name as it should be displayed to the user."
-    )
-
     category: Literal[
         "restaurant",
         "cafe",
@@ -29,6 +22,9 @@ class Place(BaseModel):
         "theater",
         "other",
     ]
+
+    description: str
+
     ambiance: list[
         Literal[
             "cozy",
@@ -43,20 +39,9 @@ class Place(BaseModel):
             "local",
             "touristy",
         ]
-    ]
+    ] = Field(default_factory=list)
 
-    neighborhood: str = Field(
-        description="The Chicago neighborhood or area where the place is located."
-    )
-
-    description: str = Field(
-        description="A concise description of what the place offers."
-    )
-
-    tags: list[str] = Field(
-        default_factory=list,
-        description="Interests, activities, and qualities associated with the place.",
-    )
+    tags: list[str] = Field(default_factory=list)
 
     price_tier: Literal[
         "free",
@@ -66,10 +51,7 @@ class Place(BaseModel):
         "$$$$",
     ]
 
-    typical_visit_minutes: int = Field(
-        ge=15,
-        description="Typical amount of time a visitor spends at the place.",
-    )
+    typical_visit_minutes: int = Field(ge=15)
 
     best_time_of_day: Literal[
         "morning",
@@ -93,9 +75,7 @@ class Place(BaseModel):
             "cold",
             "snow",
         ]
-    ] = Field(
-        default_factory=lambda: ["any"],
-    )
+    ]
 
     walking_required: Literal[
         "minimal",
@@ -119,40 +99,13 @@ class Place(BaseModel):
             "kids",
             "business",
         ]
-    ] = Field(
-        default_factory=list,
-    )
+    ]
 
-    opening_hours: dict[str, str] = Field(
-        default_factory=dict,
-    )
-
-    reservation_required: bool = False
-
-    website: str | None = None
     local_score: int = Field(
         ge=1,
         le=10,
-        description=(
-            "How uniquely representative of Chicago this place is. "
-            "Higher values indicate a more iconic or local experience."
-        ),
-    )
-    why_visit: str = Field(
-        description=(
-            "One sentence explaining what makes this place worth visiting."
-        )
-    )
-    provider_id: str
-
-    address: str | None = None
-
-    longitude: float
-
-    latitude: float
-
-    source_categories: list[str] = Field(
-        default_factory=list,
     )
 
-    source_opening_hours: str | None = None
+    why_visit: str
+
+    reservation_required: bool = False
