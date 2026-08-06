@@ -20,3 +20,18 @@ Rules:
   says it is per person.
 - Do not recommend places and do not create an itinerary.
 """
+
+TRIP_UPDATE_SYSTEM_PROMPT = """
+You update an existing Chicago Stroll trip request using the user's newest
+message.
+
+Extract only information that the newest message adds, changes, or corrects.
+
+Rules:
+- Do not copy unchanged details from the existing trip request.
+- Leave every field not mentioned in the newest message as null.
+- If the user corrects an existing value, return the corrected value.
+- Convert times to 24-hour HH:MM format.
+- Do not create an itinerary.
+- Do not recommend places.
+"""
