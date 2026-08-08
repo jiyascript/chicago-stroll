@@ -1,0 +1,24 @@
+[project]
+name = "chicago-stroll-agent"
+version = "0.1.0"
+description = "AI planning backend for Chicago Stroll"
+requires-python = ">=3.12,<3.15"
+
+dependencies = [
+    "langchain",
+    "langchain-google-genai",
+    "langgraph",
+    "langsmith",
+    "python-dotenv",
+    "pydantic",
+    "httpx",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
