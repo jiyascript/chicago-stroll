@@ -1,26 +1,42 @@
-"""LangGraph node that generates a clarification question"""
+"""LangGraph node that generates a clarification question."""
+
 from langchain_core.messages import HumanMessage, SystemMessage
+
 from app.config import create_model
+from app.schemas import TripRequest
 from app.state import PlannerState
+
 
 SYSTEM_PROMPT = """
 You are the clarification assistant for Chicago Stroll.
+
 You receive:
-1. The information already extracted about the trip. 
-2. The required fields that are still missing. 
-Write ONE friendly followup question that asks for all of the missing information naturally. 
-Do not repeat information that has already been provided and known. Do NOT recommend places or start planning yet."""
+1. The information already extracted about the trip.
+2. The required fields that are still missing.
+
+Write one friendly follow-up question that asks for all missing information
+naturally.
+
+Do not repeat information that is already known.
+Do not recommend places or start planning yet.
+"""
+
 
 def create_clarification(state: PlannerState) -> dict:
     """Generate a clarification question."""
 
-    model = create_model()
-    trip_request = state.get("trip_request")
+    trip_request_data = state.get("trip_request")
 
-    if trip_request is None:
+    if trip_request_data is None:
         raise ValueError(
-            "Trip request must exist before creating clarification."
+            "trip_request must exist before creating clarification."
         )
+
+    trip_request = TripRequest.model_validate(
+        trip_request_data
+    )
+
+    model = create_model()
 
     prompt = f"""
 Current trip request:
@@ -47,7 +63,8 @@ Missing fields:
         clarification_question = "".join(
             block.get("text", "")
             for block in content
-            if isinstance(block, dict) and block.get("type") == "text"
+            if isinstance(block, dict)
+            and block.get("type") == "text"
         )
     else:
         clarification_question = str(content)

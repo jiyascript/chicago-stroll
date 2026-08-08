@@ -8,10 +8,10 @@ REQUIRED_PLANNING_FIELDS = (
     "start_location",
 )
 
-def find_missing_fields(request: TripRequest) -> list[str]:
+def find_missing_required_fields(request: TripRequest) -> list[str]:
     """Return a list of missing required fields in the trip request."""
-    missing_fields = []
+    missing: list[str] = []
     for field in REQUIRED_PLANNING_FIELDS:
         if getattr(request, field) is None:
-            missing_fields.append(field)
-    return missing_fields
+            missing.append(field)
+    return missing

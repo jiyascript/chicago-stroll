@@ -1,40 +1,58 @@
-"""Run the Chicago Stroll planner."""
+"""Run a multi-turn Chicago Stroll conversation."""
 
 from app.graph import create_planner_graph
-
-
-SAMPLE_REQUEST = """
-My parents are visiting Chicago on August 8, 2026.
-We will start in Hyde Park around 11 AM and need to end near Union Station
-by 8 PM. We like architecture and vegetarian food.
-They cannot walk too much.
-Our total budget is $150.
-"""
+from app.schemas import TripRequest
 
 
 def main() -> None:
-    """Run the planner workflow."""
+    """Demonstrate persistent LangGraph conversation state."""
 
     graph = create_planner_graph()
 
-    initial_state = {
-        "user_message": SAMPLE_REQUEST,
-        "trip_request": None,
-        "missing_fields": [],
-        "clarification_question": None,
-        "ready_for_research": False,
+    config = {
+        "configurable": {
+            "thread_id": "demo-conversation-1",
+        }
     }
 
-    final_state = graph.invoke(initial_state)
+    first_message = """
+    My parents are visiting Chicago.
+    We will start in Hyde Park at 11 AM and need to end near Union Station
+    by 8 PM. We like architecture and vegetarian food.
+    They cannot walk too much.
+    Our total budget is $150.
+    """
 
-    print("\n===== FINAL STATE =====\n")
-    print(final_state["trip_request"].model_dump_json(indent=2))
-    print("\nMissing Fields:")
-    print(final_state["missing_fields"])
-    print("\nClarification Question:")
-    print(final_state.get("clarification_question"))
-    print("\nReady For Research:")
-    print(final_state.get("ready_for_research",False))
+    first_result = graph.invoke(
+        {
+            "user_message": first_message,
+        },
+        config=config,
+    )
+
+    print("\n===== TURN 1 =====")
+    print("Missing:", first_result.get("missing_fields"))
+    print(
+        "Question:",
+        first_result.get("clarification_question"),
+    )
+
+    second_result = graph.invoke(
+        {
+            "user_message": "August 8, 2026.",
+        },
+        config=config,
+    )
+
+    print("\n===== TURN 2 =====")
+    trip_request = TripRequest.model_validate(second_result["trip_request"])
+
+    print(trip_request.model_dump_json(indent=2,))
+    print("Missing:", second_result.get("missing_fields"))
+    print(
+        "Ready:",
+        second_result.get("ready_for_research"),
+    )
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 """Tests for intake completeness checking."""
 
 from app.schemas import TripRequest
-from app.services.intake import find_missing_fields
+from app.services.intake import find_missing_required_fields
 
 
 def test_find_missing_required_fields() -> None:
@@ -12,7 +12,7 @@ def test_find_missing_required_fields() -> None:
         interests=["architecture"],
     )
 
-    missing = find_missing_fields(request)
+    missing = find_missing_required_fields(request)
 
     assert "date" in missing
     assert "end_time" in missing

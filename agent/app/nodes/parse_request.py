@@ -17,5 +17,5 @@ def parse_request(state: PlannerState) -> dict:
         ]
     )
     return {
-        "trip_request": trip_request,
+        "trip_request": trip_request.model_dump(),
     }
