@@ -4,4 +4,5 @@ from app.schemas.trip_request import TripRequest
 from app.schemas.trip_request_update import TripRequestUpdate
 from app.schemas.places import Place
 from app.schemas.place_enrichment import PlaceEnrichment
-__all__ = ["PlaceEnrichment","RawPlace","TripRequest", "TripRequestUpdate", "Place"]
+from app.schemas.retrieved_place import RetrievedPlace
+__all__ = ["PlaceEnrichment","RawPlace","TripRequest", "TripRequestUpdate", "Place", "RetrievedPlace"]

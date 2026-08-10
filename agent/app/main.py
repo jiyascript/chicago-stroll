@@ -53,7 +53,19 @@ def main() -> None:
         "Ready:",
         second_result.get("ready_for_research"),
     )
+    retrieved = second_result[
+        "retrieved_places"
+    ]
 
+    print()
+
+    print("Top candidates:")
+
+    for candidate in retrieved[:5]:
+        print(
+            candidate.place.name,
+            candidate.score,
+        )   
 
 if __name__ == "__main__":
     main()
