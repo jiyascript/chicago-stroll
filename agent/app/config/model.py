@@ -16,4 +16,6 @@ def create_model() -> ChatGoogleGenerativeAI:
 
     return ChatGoogleGenerativeAI(
         model="gemini-3.6-flash",
+        timeout=30,
+        max_retries = 3
     )

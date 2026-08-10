@@ -1,0 +1,953 @@
+{
+  "5171b504cf73e855c059f86008ef61f04440f00103f901fd374606030000009203264368696361676f20426f617264206f66205472616465204275696c64696e67204d757365756d": {
+    "name": "Chicago Board of Trade Building Museum",
+    "category": "museum",
+    "ambiance": [
+      "historic",
+      "quiet",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A museum space inside the historic Chicago Board of Trade Building highlighting the rich history of commodity trading and Art Deco architecture.",
+    "tags": [
+      "museum",
+      "history",
+      "architecture",
+      "art deco",
+      "finance",
+      "loop"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 45,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.cbotbuilding.com/chicago-board-of-trade-building-museum/",
+    "local_score": 8,
+    "why_visit": "Provides insight into Chicago's legacy as a global financial hub inside an iconic Art Deco skyscraper.",
+    "provider_id": "5171b504cf73e855c059f86008ef61f04440f00103f901fd374606030000009203264368696361676f20426f617264206f66205472616465204275696c64696e67204d757365756d",
+    "address": "Chicago Board of Trade Building Museum, 141 West Jackson Boulevard, Chicago, IL 60604, United States of America",
+    "longitude": -87.6320684,
+    "latitude": 41.8779887,
+    "source_categories": [
+      "entertainment",
+      "entertainment.museum",
+      "no_fee",
+      "no_fee.no"
+    ],
+    "source_opening_hours": "Mo-Fr 10:00-16:00"
+  },
+  "51c11f7efe7be855c0593f8c101e6df04440f00103f901a6349bb10000000092030c4d6f6e6579204d757365756d": {
+    "name": "Money Museum",
+    "category": "museum",
+    "ambiance": [
+      "historic",
+      "family-friendly",
+      "quiet"
+    ],
+    "neighborhood": "Loop",
+    "description": "A free educational museum located inside the Federal Reserve Bank of Chicago, showcasing currency history, economics, and interactive finance exhibits.",
+    "tags": [
+      "museum",
+      "finance",
+      "currency",
+      "history",
+      "educational",
+      "free"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 60,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "kids"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.chicagofed.org/education/money-museum/",
+    "local_score": 7,
+    "why_visit": "Features unique currency exhibits, interactive economic displays, and a famous cube containing one million dollars in cash inside the Chicago Fed.",
+    "provider_id": "51c11f7efe7be855c0593f8c101e6df04440f00103f901a6349bb10000000092030c4d6f6e6579204d757365756d",
+    "address": "Money Museum, 230 South LaSalle Street, Chicago, IL 60604, United States of America",
+    "longitude": -87.632568,
+    "latitude": 41.87833,
+    "source_categories": [
+      "entertainment",
+      "entertainment.museum",
+      "no_fee",
+      "no_fee.no"
+    ],
+    "source_opening_hours": "Mo-Fr 08:30-17:00"
+  },
+  "5105e67c0cb1e855c0599e8e119a6ef04440f00103f9014223648c0200000092030d436f6c6f7220466163746f7279": {
+    "name": "Color Factory",
+    "category": "museum",
+    "ambiance": [
+      "lively",
+      "trendy",
+      "family-friendly",
+      "creative",
+      "touristy"
+    ],
+    "neighborhood": "Loop",
+    "description": "An immersive, interactive art museum inside Willis Tower filled with colorful room-scale installations, ball pits, and sensory experiences designed for all ages.",
+    "tags": [
+      "interactive",
+      "art",
+      "immersive",
+      "willis tower",
+      "family"
+    ],
+    "price_tier": "$$$",
+    "typical_visit_minutes": 75,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "moderate",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "kids"
+    ],
+    "opening_hours": {},
+    "reservation_required": true,
+    "website": "https://www.colorfactory.co/locations/chicago",
+    "local_score": 6,
+    "why_visit": "A vibrant and cheerful experiential art destination in the heart of the Loop featuring playful, photo-worthy interactive installations.",
+    "provider_id": "5105e67c0cb1e855c0599e8e119a6ef04440f00103f9014223648c0200000092030d436f6c6f7220466163746f7279",
+    "address": "Color Factory, 233 South Wacker Drive, Chicago, IL 60606, United States of America",
+    "longitude": -87.6358062,
+    "latitude": 41.8783753,
+    "source_categories": [
+      "entertainment",
+      "entertainment.museum"
+    ],
+    "source_opening_hours": null
+  },
+  "51f1c05b7bfae755c0594edb7525b8f04440f00103f901ca7a278d02000000920322507269747a6b6572204d696c6974617279204d757365756d2026204c696272617279": {
+    "name": "Pritzker Military Museum & Library",
+    "category": "museum",
+    "ambiance": [
+      "historic",
+      "quiet",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A specialized museum and research library in the Loop dedicated to military history, veterans, and the concept of the citizen-soldier.",
+    "tags": [
+      "military history",
+      "library",
+      "exhibits",
+      "loop"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 90,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.pritzkermilitary.org/",
+    "local_score": 7,
+    "why_visit": "Features deep archival collections, military artifacts, and thoughtful exhibits focused on military heritage and citizen-soldiers.",
+    "provider_id": "51f1c05b7bfae755c0594edb7525b8f04440f00103f901ca7a278d02000000920322507269747a6b6572204d696c6974617279204d757365756d2026204c696272617279",
+    "address": "Pritzker Military Museum & Library, 104 South Michigan Avenue, Chicago, IL 60603, United States of America",
+    "longitude": -87.6246632,
+    "latitude": 41.8806197,
+    "source_categories": [
+      "entertainment",
+      "entertainment.museum"
+    ],
+    "source_opening_hours": "Mo-Sa 10:00-16:00; Tu-Th 10:00-18:00; Su 12:00-16:00"
+  },
+  "517f2e1a321ee855c059d8f15f2008f14440f00103f901a7b42b17020000009203134d757365756d206f6620496c6c7573696f6e73": {
+    "name": "Museum of Illusions",
+    "category": "museum",
+    "ambiance": [
+      "family-friendly",
+      "lively",
+      "creative",
+      "touristy"
+    ],
+    "neighborhood": "Loop",
+    "description": "An interactive, mind-bending museum featuring optical illusions, holograms, and visual puzzles designed to trick the senses.",
+    "tags": [
+      "museum",
+      "illusions",
+      "interactive",
+      "loop",
+      "photo-ops"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 60,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "kids"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://moichicago.com/",
+    "local_score": 5,
+    "why_visit": "Offers engaging, hands-on visual illusions and playful photo opportunities right in the heart of downtown Chicago.",
+    "provider_id": "517f2e1a321ee855c059d8f15f2008f14440f00103f901a7b42b17020000009203134d757365756d206f6620496c6c7573696f6e73",
+    "address": "Museum of Illusions, 25 East Washington Street, Chicago, IL 60602, United States of America",
+    "longitude": -87.626843,
+    "latitude": 41.8830605,
+    "source_categories": [
+      "entertainment",
+      "entertainment.museum",
+      "fee"
+    ],
+    "source_opening_hours": null
+  },
+  "516f192609f8e755c05955b65906e6ef4440f00103f90109bf35df00000000920326546865204d757365756d206f6620436f6e74656d706f726172792050686f746f677261706879": {
+    "name": "The Museum of Contemporary Photography",
+    "category": "museum",
+    "ambiance": [
+      "quiet",
+      "creative",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A premier museum founded by Columbia College Chicago dedicated to contemporary photography and provocative visual culture.",
+    "tags": [
+      "photography",
+      "art museum",
+      "contemporary art",
+      "columbia college",
+      "loop"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 60,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.mocp.org/",
+    "local_score": 8,
+    "why_visit": "Offers world-class rotating contemporary photography exhibitions with free admission in the heart of the Loop.",
+    "provider_id": "516f192609f8e755c05955b65906e6ef4440f00103f90109bf35df00000000920326546865204d757365756d206f6620436f6e74656d706f726172792050686f746f677261706879",
+    "address": "The Museum of Contemporary Photography, 600 South Michigan Avenue, Chicago, IL 60605, United States of America",
+    "longitude": -87.6245139,
+    "latitude": 41.8742073,
+    "source_categories": [
+      "entertainment",
+      "entertainment.museum",
+      "no_fee",
+      "no_fee.no"
+    ],
+    "source_opening_hours": null
+  },
+  "516972844cd7e755c0597fb9c8f298f04440f00101f901d28a1c000000000092031c5468652041727420496e73746974757465206f66204368696361676f": {
+    "name": "The Art Institute of Chicago",
+    "category": "museum",
+    "ambiance": [
+      "historic",
+      "creative",
+      "touristy",
+      "family-friendly"
+    ],
+    "neighborhood": "Loop",
+    "description": "World-renowned museum housing a vast collection of Impressionist, Post-Impressionist, modern, and classic artwork in the heart of downtown Chicago.",
+    "tags": [
+      "art",
+      "museum",
+      "impressionism",
+      "culture",
+      "gallery"
+    ],
+    "price_tier": "$$$",
+    "typical_visit_minutes": 180,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "high",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "kids",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.artic.edu/",
+    "local_score": 10,
+    "why_visit": "One of the world's premier art museums, home to famous masterpieces like Seurat's 'A Sunday on La Grande Jatte' and Wood's 'American Gothic'.",
+    "provider_id": "516972844cd7e755c0597fb9c8f298f04440f00101f901d28a1c000000000092031c5468652041727420496e73746974757465206f66204368696361676f",
+    "address": "The Art Institute of Chicago, 111 South Michigan Avenue, Chicago, IL 60603, United States of America",
+    "longitude": -87.62251580175656,
+    "latitude": 41.879667613992744,
+    "source_categories": [
+      "building",
+      "building.commercial",
+      "building.tourism",
+      "entertainment",
+      "entertainment.museum"
+    ],
+    "source_opening_hours": "Mo 11:00-17:00; Tu-We off; Th 11:00-20:00; Fr-Su 11:00-17:00"
+  },
+  "510cf3d4d9ffe755c0594f4f690e5af14440f00103f901bd2c273401000000920317416d65726963616e2057726974657273204d757365756d": {
+    "name": "American Writers Museum",
+    "category": "museum",
+    "ambiance": [
+      "creative",
+      "historic",
+      "family-friendly"
+    ],
+    "neighborhood": "Loop",
+    "description": "Interactive museum on Michigan Avenue honoring the history, legacy, and impact of American writers and literature.",
+    "tags": [
+      "museum",
+      "literature",
+      "history",
+      "interactive",
+      "loop"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 90,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://americanwritersmuseum.org/",
+    "local_score": 8,
+    "why_visit": "An engaging, highly interactive museum showcasing American literary heritage right in the Loop.",
+    "provider_id": "510cf3d4d9ffe755c0594f4f690e5af14440f00103f901bd2c273401000000920317416d65726963616e2057726974657273204d757365756d",
+    "address": "American Writers Museum, 180 North Michigan Avenue, Chicago, IL 60601, United States of America",
+    "longitude": -87.6249909,
+    "latitude": 41.8855608,
+    "source_categories": [
+      "entertainment",
+      "entertainment.museum"
+    ],
+    "source_opening_hours": null
+  },
+  "5114198b5577e855c0593e9a043646ef4440f00102f901bc62735800000000920313506c617920537472656574204d65757365756d": {
+    "name": "Play Street Meuseum",
+    "category": "museum",
+    "ambiance": [
+      "family-friendly",
+      "creative",
+      "lively"
+    ],
+    "neighborhood": "Loop",
+    "description": "An interactive indoor play museum designed for young children and toddlers to explore through creative and imaginative play.",
+    "tags": [
+      "kids",
+      "indoor play",
+      "children's museum",
+      "south loop"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 90,
+    "best_time_of_day": "morning",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "family",
+      "kids"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 6,
+    "why_visit": "Offers a hands-on, educational, and engaging indoor play environment perfect for families with young children visiting or living in South Loop.",
+    "provider_id": "5114198b5577e855c0593e9a043646ef4440f00102f901bc62735800000000920313506c617920537472656574204d65757365756d",
+    "address": "Play Street Meuseum, South Delano Court, Chicago, IL 60605, United States of America",
+    "longitude": -87.63228357871805,
+    "latitude": 41.869330169913596,
+    "source_categories": [
+      "building",
+      "building.tourism",
+      "entertainment",
+      "entertainment.museum"
+    ],
+    "source_opening_hours": null
+  },
+  "51f9895ea1eae855c0596b7583b23af14440f00103f9017407ff2d030000009203224d757365756d206f662042726f61646361737420436f6d6d756e69636174696f6e73": {
+    "name": "Museum of Broadcast Communications",
+    "category": "museum",
+    "ambiance": [
+      "historic",
+      "creative",
+      "family-friendly"
+    ],
+    "neighborhood": "Near West Side",
+    "description": "A museum dedicated to preserving and celebrating the history and cultural impact of radio and television broadcasting.",
+    "tags": [
+      "museum",
+      "broadcasting",
+      "television",
+      "radio",
+      "media history"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 90,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "moderate",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.museum.tv/",
+    "local_score": 7,
+    "why_visit": "Discover the fascinating history of radio and television media through interactive exhibits, archival footage, and iconic broadcast memorabilia.",
+    "provider_id": "51f9895ea1eae855c0596b7583b23af14440f00103f9017407ff2d030000009203224d757365756d206f662042726f61646361737420436f6d6d756e69636174696f6e73",
+    "address": "Museum of Broadcast Communications, 440 West Randolph Street, Chicago, IL 60606, United States of America",
+    "longitude": -87.6393207,
+    "latitude": 41.8846038,
+    "source_categories": [
+      "entertainment",
+      "entertainment.museum"
+    ],
+    "source_opening_hours": null
+  },
+  "51520298e632e855c059fcd00c3d4df04440f00102f901bb6264040000000092030d507269747a6b6572205061726b": {
+    "name": "Pritzker Park",
+    "category": "park",
+    "ambiance": [
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A compact urban pocket park in Chicago's Loop featuring seating and green space near Harold Washington Library.",
+    "tags": [
+      "park",
+      "pocket park",
+      "loop",
+      "downtown",
+      "green space"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 20,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "sunny"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.chicagoparkdistrict.com/parks-facilities/pritzker-park",
+    "local_score": 5,
+    "why_visit": "Offers a convenient spot to pause, sit outdoors, and take a quick break in the center of the Loop.",
+    "provider_id": "51520298e632e855c059fcd00c3d4df04440f00102f901bb6264040000000092030d507269747a6b6572205061726b",
+    "address": "Pritzker Park, 310, Chicago, IL 60604, United States of America",
+    "longitude": -87.62810673565517,
+    "latitude": 41.87735713125036,
+    "source_categories": [
+      "leisure",
+      "leisure.park"
+    ],
+    "source_opening_hours": null
+  },
+  "51cdc477668ce855c0595dc5bb85c3f04440f00102f901894d1546000000009203194e6f72746865726e205472757374206f70656e207370616365": {
+    "name": "Northern Trust open space",
+    "category": "park",
+    "ambiance": [
+      "quiet",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A public plaza and open space located in Chicago's Loop financial district, offering a outdoor spot to rest amid surrounding architecture.",
+    "tags": [
+      "plaza",
+      "loop",
+      "outdoor",
+      "downtown"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 15,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 5,
+    "why_visit": "A convenient outdoor resting spot tucked among skyscrapers in the heart of the Loop.",
+    "provider_id": "51cdc477668ce855c0595dc5bb85c3f04440f00102f901894d1546000000009203194e6f72746865726e205472757374206f70656e207370616365",
+    "address": "Northern Trust open space, Loop, Chicago, Illinois, United States of America",
+    "longitude": -87.63356935211341,
+    "latitude": 41.88096687000755,
+    "source_categories": [
+      "leisure",
+      "leisure.park"
+    ],
+    "source_opening_hours": null
+  },
+  "51aa691cc89be855c059ff36d8be10f04440f00101f90180699d000000000092030d4427416e67656c6f205061726b": {
+    "name": "D'Angelo Park",
+    "category": "park",
+    "ambiance": [
+      "quiet",
+      "local",
+      "family-friendly"
+    ],
+    "neighborhood": "Loop",
+    "description": "A compact neighborhood green space in Chicago's Loop area offering a quiet spot for relaxing and dog walking.",
+    "tags": [
+      "park",
+      "green space",
+      "dog-friendly",
+      "loop"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "sunny"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "kids"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 5,
+    "why_visit": "A convenient pocket park in the Loop ideal for a quick outdoor break or leashed dog walks.",
+    "provider_id": "51aa691cc89be855c059ff36d8be10f04440f00101f90180699d000000000092030d4427416e67656c6f205061726b",
+    "address": "D'Angelo Park, 438, Chicago, IL 60607, United States of America",
+    "longitude": -87.634508159396,
+    "latitude": 41.87551103169789,
+    "source_categories": [
+      "dogs",
+      "dogs.leashed",
+      "leisure",
+      "leisure.park"
+    ],
+    "source_opening_hours": null
+  },
+  "5122d14063eae755c05978ed167f79f04440f00102f901c31e050e0000000092030c536f7574682047617264656e": {
+    "name": "South Garden",
+    "category": "park",
+    "ambiance": [
+      "quiet",
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A tranquil landscaped garden in the Loop featuring shade trees, peaceful seating, and a central fountain.",
+    "tags": [
+      "garden",
+      "park",
+      "loop",
+      "fountain",
+      "outdoor-space"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 8,
+    "why_visit": "A peaceful downtown retreat offering quiet green space and elegant landscape architecture right off Michigan Avenue.",
+    "provider_id": "5122d14063eae755c05978ed167f79f04440f00102f901c31e050e0000000092030c536f7574682047617264656e",
+    "address": "South Garden, Loop, Chicago, Illinois, United States of America",
+    "longitude": -87.6236808903673,
+    "latitude": 41.8787077772094,
+    "source_categories": [
+      "leisure",
+      "leisure.park"
+    ],
+    "source_opening_hours": null
+  },
+  "51b6ec2570b5e855c059a8a5991571f04440f00102f901614e3a46000000009203125468652057696c6c69732054657272616365": {
+    "name": "The Willis Terrace",
+    "category": "park",
+    "ambiance": [
+      "local",
+      "touristy",
+      "family-friendly"
+    ],
+    "neighborhood": "Loop",
+    "description": "An outdoor public terrace space situated at the Willis Tower complex in the Loop, offering a urban spot to relax amidst Chicago skyscrapers.",
+    "tags": [
+      "park",
+      "plaza",
+      "terrace",
+      "willis tower",
+      "loop"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "sunny"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 7,
+    "why_visit": "Offers a pleasant outdoor pause right at the foot of one of Chicago's most iconic skyscrapers in the heart of the Loop.",
+    "provider_id": "51b6ec2570b5e855c059a8a5991571f04440f00102f901614e3a46000000009203125468652057696c6c69732054657272616365",
+    "address": "The Willis Terrace, Loop, Chicago, Illinois, United States of America",
+    "longitude": -87.6360741014822,
+    "latitude": 41.87845106127071,
+    "source_categories": [
+      "leisure",
+      "leisure.park"
+    ],
+    "source_opening_hours": null
+  },
+  "5121437f8648e855c059b4529b5ccaef4440f00102f90153b10907000000009203115072696e7465727320526f77205061726b": {
+    "name": "Printers Row Park",
+    "category": "park",
+    "ambiance": [
+      "quiet",
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A charming neighborhood pocket park located in historic Printers Row, offering green space, bench seating, and a peaceful community gathering spot.",
+    "tags": [
+      "park",
+      "printers row",
+      "south loop",
+      "pocket park",
+      "green space"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "sunny"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 7,
+    "why_visit": "A peaceful urban oasis nestled in historic Printers Row, perfect for a relaxing stroll or outdoor break.",
+    "provider_id": "5121437f8648e855c059b4529b5ccaef4440f00102f90153b10907000000009203115072696e7465727320526f77205061726b",
+    "address": "Printers Row Park, Loop, Chicago, Illinois, United States of America",
+    "longitude": -87.62942659786178,
+    "latitude": 41.873363090363824,
+    "source_categories": [
+      "leisure",
+      "leisure.park"
+    ],
+    "source_opening_hours": null
+  },
+  "516a3d73a8ece755c059ee73e553b1f04440f00102f901d24a050e0000000092030c4e6f7274682047617264656e": {
+    "name": "North Garden",
+    "category": "park",
+    "ambiance": [
+      "quiet",
+      "romantic",
+      "historic"
+    ],
+    "neighborhood": "Loop",
+    "description": "A serene outdoor garden in Chicago's Loop, offering lush greenery, shady trees, and a peaceful escape from the busy city streets.",
+    "tags": [
+      "park",
+      "garden",
+      "loop",
+      "outdoors",
+      "greenery"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 7,
+    "why_visit": "Provides a lush, quiet urban oasis right in downtown Chicago, ideal for relaxing near major cultural institutions.",
+    "provider_id": "516a3d73a8ece755c059ee73e553b1f04440f00102f901d24a050e0000000092030c4e6f7274682047617264656e",
+    "address": "North Garden, Loop, Chicago, Illinois, United States of America",
+    "longitude": -87.62381945852181,
+    "latitude": 41.88041161254647,
+    "source_categories": [
+      "leisure",
+      "leisure.park"
+    ],
+    "source_opening_hours": null
+  },
+  "51af5a99f04be855c059803edbb463f04440f00103f9013d30837701000000920315496e74656c6c6967656e7473696120436f66666565": {
+    "name": "Intelligentsia Coffee",
+    "category": "cafe",
+    "ambiance": [
+      "historic",
+      "cozy",
+      "local",
+      "lively"
+    ],
+    "neighborhood": "Loop",
+    "description": "Acclaimed Chicago specialty coffee pioneer offering artisanal espresso and pour-overs inside the historic Monadnock Building.",
+    "tags": [
+      "coffee",
+      "espresso",
+      "historic building",
+      "the loop",
+      "craft coffee"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "morning",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.intelligentsiacoffee.com/monadnock-coffeebar",
+    "local_score": 9,
+    "why_visit": "Combines premier Chicago specialty coffee with historic architecture inside the iconic Monadnock Building.",
+    "provider_id": "51af5a99f04be855c059803edbb463f04440f00103f9013d30837701000000920315496e74656c6c6967656e7473696120436f66666565",
+    "address": "Intelligentsia Coffee, 53 West Jackson Boulevard, Chicago, IL 60604, United States of America",
+    "longitude": -87.629635,
+    "latitude": 41.8780428,
+    "source_categories": [
+      "catering",
+      "catering.cafe"
+    ],
+    "source_opening_hours": null
+  },
+  "510a815ce248e855c059701b576d48f04440f00103f9014bf6c56c01000000920314486172727927732053616e647763682053686f70": {
+    "name": "Harry's Sandwch Shop",
+    "category": "restaurant",
+    "ambiance": [
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A classic downtown lunch spot in the Loop offering quick sandwiches and casual deli fare.",
+    "tags": [
+      "sandwiches",
+      "deli",
+      "lunch",
+      "casual",
+      "loop"
+    ],
+    "price_tier": "$",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 6,
+    "why_visit": "Ideal for a fast, straightforward sandwich break while exploring or working in downtown Chicago.",
+    "provider_id": "510a815ce248e855c059701b576d48f04440f00103f9014bf6c56c01000000920314486172727927732053616e647763682053686f70",
+    "address": "Harry's Sandwch Shop, 336 South Dearborn Street, Chicago, IL 60604, United States of America",
+    "longitude": -87.6294485,
+    "latitude": 41.8772103,
+    "source_categories": [
+      "catering",
+      "catering.cafe"
+    ],
+    "source_opening_hours": null
+  },
+  "51d2e8691b5ae855c0598151932a9bf04440f00103f901c57a5b220300000092030e537465726c696e6720436166c3a9": {
+    "name": "Sterling Caf\u00e9",
+    "category": "cafe",
+    "ambiance": [
+      "cozy",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A convenient downtown Loop coffee shop offering morning coffee, breakfast, and casual lunch options.",
+    "tags": [
+      "coffee",
+      "breakfast",
+      "lunch",
+      "loop"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "morning",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 6,
+    "why_visit": "A reliable weekday coffee and quick lunch spot situated right in the heart of the Chicago Loop.",
+    "provider_id": "51d2e8691b5ae855c0598151932a9bf04440f00103f901c57a5b220300000092030e537465726c696e6720436166c3a9",
+    "address": "Sterling Caf\u00e9, 125 South Clark Street, Chicago, IL 60604, United States of America",
+    "longitude": -87.6304997,
+    "latitude": 41.8797353,
+    "source_categories": [
+      "catering",
+      "catering.cafe"
+    ],
+    "source_opening_hours": "Mo-Fr 07:30-15:30"
+  }
+}
