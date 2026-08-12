@@ -1,7 +1,17 @@
 """Run a multi-turn Chicago Stroll conversation."""
 
 from app.graph import create_planner_graph
-from app.schemas import TripRequest, DraftItinerary, RetrievedPlace, CritiqueResult
+from app.schemas import (
+    DraftItinerary,
+    RetrievedPlace,
+    TripRequest,
+)
+
+
+FOOD_CATEGORIES = {
+    "restaurant",
+    "cafe",
+}
 
 
 def main() -> None:
@@ -31,10 +41,17 @@ def main() -> None:
     )
 
     print("\n===== TURN 1 =====")
-    print("Missing:", first_result.get("missing_fields"))
+
+    print(
+        "Missing:",
+        first_result.get("missing_fields"),
+    )
+
     print(
         "Question:",
-        first_result.get("clarification_question"),
+        first_result.get(
+            "clarification_question"
+        ),
     )
 
     second_result = graph.invoke(
@@ -45,45 +62,125 @@ def main() -> None:
     )
 
     print("\n===== TURN 2 =====")
-    trip_request = TripRequest.model_validate(second_result["trip_request"])
 
-    print(trip_request.model_dump_json(indent=2,))
-    print("Missing:", second_result.get("missing_fields"))
+    trip_request = TripRequest.model_validate(
+        second_result["trip_request"]
+    )
+
+    print(
+        trip_request.model_dump_json(
+            indent=2
+        )
+    )
+
+    print(
+        "Missing:",
+        second_result.get(
+            "missing_fields"
+        ),
+    )
+
     print(
         "Ready:",
-        second_result.get("ready_for_research"),
+        second_result.get(
+            "ready_for_research"
+        ),
     )
-    retrieved = second_result.get(
+
+    retrieved_data = second_result.get(
         "retrieved_places",
         [],
     )
 
-    print("\nTop candidates:")
+    retrieved_places = [
+        RetrievedPlace.model_validate(
+            candidate
+        )
+        for candidate in retrieved_data
+    ]
 
-    for candidate_data in retrieved[:5]:
-        candidate = RetrievedPlace.model_validate(
-            candidate_data
+    attractions = [
+        candidate
+        for candidate in retrieved_places
+        if candidate.place.category
+        not in FOOD_CATEGORIES
+    ]
+
+    food_options = [
+        candidate
+        for candidate in retrieved_places
+        if candidate.place.category
+        in FOOD_CATEGORIES
+    ]
+
+    print("\n===== TOP ATTRACTIONS =====")
+
+    if not attractions:
+        print("No attraction candidates retrieved.")
+    else:
+        for candidate in attractions[:5]:
+            print(
+                f"- {candidate.place.name}: "
+                f"{candidate.score:.1f}"
+            )
+
+    print("\n===== FOOD OPTIONS =====")
+
+    if not food_options:
+        print("No food candidates retrieved.")
+    else:
+        for candidate in food_options[:5]:
+            print(
+                f"- {candidate.place.name}: "
+                f"{candidate.score:.1f}"
+            )
+
+            if candidate.matched_tags:
+                print(
+                    "  Matches:",
+                    ", ".join(
+                        candidate.matched_tags
+                    ),
+                )
+
+    print("\n===== DRAFT ITINERARY =====")
+
+    draft_data = second_result.get(
+        "draft_itinerary"
+    )
+
+    if draft_data is None:
+        print("No itinerary generated.")
+    else:
+        draft = DraftItinerary.model_validate(
+            draft_data
         )
 
         print(
-            candidate.place.name,
-            candidate.score,
+            draft.model_dump_json(
+                indent=2
+            )
         )
-    draft= DraftItinerary.model_validate(second_result["draft_itinerary"])
-    print("\n===== DRAFT ITINERARY =====")
 
-    if draft is None:
-        print("No itinerary generated.")
-    else:
-        print(draft.model_dump_json(indent=2))
     print("\n===== CRITIQUE =====")
-    print(second_result.get("critique_result"))
+
+    critique = second_result.get(
+        "critique_result"
+    )
+
+    if critique is None:
+        print("No critique generated.")
+    else:
+        print(critique)
 
     print(
         "\nRepair count:",
-        second_result.get("repair_count", 0),
+        second_result.get(
+            "repair_count",
+            0,
+        ),
     )
-    
+
 
 if __name__ == "__main__":
     main()

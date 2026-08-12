@@ -13,7 +13,21 @@ WALKING_ORDER = {
     "moderate": 1,
     "high": 2,
 }
+FOOD_CATEGORIES = {
+    "restaurant",
+    "cafe",
+}
 
+
+def normalize_values(
+    values: list[str],
+) -> set[str]:
+    """Normalize text values for retrieval comparisons."""
+
+    return {
+        value.strip().lower()
+        for value in values
+    }
 
 def evaluate_place(
     place: Place,
@@ -26,7 +40,7 @@ def evaluate_place(
 
     requested_interests = {
         interest.lower()
-        for interest in request.interests
+        for interest in (request.interests or [])
     }
 
     place_tags = {
@@ -48,7 +62,7 @@ def evaluate_place(
 
     preferred = {
         neighborhood.lower()
-        for neighborhood in request.preferred_neighborhoods
+        for neighborhood in (request.preferred_neighborhoods or [])
     }
 
     if place.neighborhood.lower() in preferred:
@@ -59,7 +73,7 @@ def evaluate_place(
 
     excluded = {
         neighborhood.lower()
-        for neighborhood in request.excluded_neighborhoods
+        for neighborhood in (request.excluded_neighborhoods or [])
     }
 
     if place.neighborhood.lower() in excluded:
@@ -138,6 +152,51 @@ def evaluate_place(
         reasons.append(
             "Strong Chicago-specific experience"
         )
+        # Dietary compatibility.
+    dietary_preferences = normalize_values(
+        request.dietary_preferences or []
+    )
+
+    place_tags = normalize_values(
+        place.tags
+    )
+
+    dietary_matches = (
+        dietary_preferences
+        & place_tags
+    )
+
+    if (
+        place.category in FOOD_CATEGORIES
+        and dietary_matches
+    ):
+        score += 6 * len(dietary_matches)
+
+        reasons.append(
+            "Matches dietary preferences: "
+            + ", ".join(
+                sorted(dietary_matches)
+            )
+        )
+        # Food venue quality.
+    if place.category in FOOD_CATEGORIES:
+        if place.local_score >= 8:
+            score += 1
+
+            reasons.append(
+                "Strong local food option"
+            )
+
+        if (
+            request.group_type
+            and request.group_type
+            in place.group_friendly
+        ):
+            score += 1
+
+            reasons.append(
+                "Food venue suits the group"
+            )
 
     return RetrievedPlace(
         place=place,
@@ -169,16 +228,89 @@ def rank_places(
 
     return ranked[:top_k]
 
-
 def retrieve_places(
     repository: PlaceRepository,
     request: TripRequest,
     top_k: int = 15,
 ) -> list[RetrievedPlace]:
-    """Retrieve the best candidate places for a trip."""
+    """Retrieve a diverse set of relevant trip candidates."""
 
-    return rank_places(
-        places=repository.all(),
+    all_places = repository.all()
+
+    ranked = rank_places(
+        places=all_places,
         request=request,
-        top_k=top_k,
+        top_k=len(all_places),
     )
+
+    # No special food requirement.
+    if not request.dietary_preferences:
+        return ranked[:top_k]
+
+    dietary = normalize_values(
+        request.dietary_preferences
+    )
+
+    compatible_food = [
+        candidate
+        for candidate in ranked
+        if (
+            candidate.place.category
+            in FOOD_CATEGORIES
+            and dietary.intersection(
+                normalize_values(
+                    candidate.place.tags
+                )
+            )
+        )
+    ]
+
+    other_food = [
+        candidate
+        for candidate in ranked
+        if (
+            candidate.place.category
+            in FOOD_CATEGORIES
+            and candidate
+            not in compatible_food
+        )
+    ]
+
+    food_candidates = (
+        compatible_food
+        + other_food
+    )
+
+    non_food_candidates = [
+        candidate
+        for candidate in ranked
+        if candidate.place.category
+        not in FOOD_CATEGORIES
+    ]
+
+    # Reserve part of retrieval context for food.
+    food_limit = min(
+        5,
+        len(food_candidates),
+    )
+
+    attraction_limit = max(
+        0,
+        top_k - food_limit,
+    )
+
+    selected = (
+        non_food_candidates[
+            :attraction_limit
+        ]
+        + food_candidates[
+            :food_limit
+        ]
+    )
+
+    selected.sort(
+        key=lambda candidate: candidate.score,
+        reverse=True,
+    )
+
+    return selected

@@ -3,7 +3,7 @@
 from app.schemas import PlannerContext
 
 
-def format_list(values: list[str]) -> str:
+def format_list(values: list[str] | None) -> str:
     """Format a list for the planner prompt."""
 
     return ", ".join(values) if values else "None"
@@ -65,12 +65,15 @@ def build_planner_prompt(
             else "- No retrieval reasons provided"
         )
 
-        matched_tags = format_list(candidate.matched_tags)
+        matched_tags = format_list(
+            candidate.matched_tags
+        )
 
         candidate_sections.append(
             f"""
 Candidate {index}
 
+Provider ID: {place.provider_id}
 Name: {place.name}
 Category: {place.category}
 Neighborhood: {place.neighborhood}
@@ -97,7 +100,9 @@ Why visit: {place.why_visit}
 """.strip()
         )
 
-    trip_section = "\n".join(trip_lines)
+    trip_section = "\n".join(
+        trip_lines
+    )
 
     candidates_section = (
         "\n\n".join(candidate_sections)
@@ -108,11 +113,11 @@ Why visit: {place.why_visit}
     return f"""
 You are the itinerary planning component for Chicago Stroll.
 
-Your job is to create a realistic, enjoyable Chicago itinerary using the
-structured trip request and the retrieved candidate places below.
+Your job is to create a realistic and enjoyable Chicago itinerary using only
+the structured trip request and retrieved candidate places below.
 
-You MUST use only places included in the candidate list.
-Do not invent additional restaurants, attractions, neighborhoods, or venues.
+You may choose and schedule candidate places, but candidate metadata is
+authoritative and must never be rewritten.
 
 TRIP REQUEST
 ------------
@@ -126,6 +131,39 @@ CANDIDATE PLACES
 {candidates_section}
 
 
+OUTPUT CONTRACT
+---------------
+
+Each itinerary stop must contain ONLY:
+
+- provider_id
+- arrival_time
+- departure_time
+- reason
+
+The provider_id must exactly match one of the provider IDs in the candidate
+list above.
+
+Do NOT return full place objects.
+
+Do NOT reproduce, rewrite, infer, or modify candidate metadata such as:
+
+- place name
+- category
+- tags
+- description
+- coordinates
+- opening hours
+- typical visit duration
+- price tier
+- neighborhood
+- transit access
+- dietary metadata
+
+The application will resolve provider_id back to the authoritative Place
+record after generation.
+
+
 PLANNING REQUIREMENTS
 ---------------------
 
@@ -135,10 +173,10 @@ Follow these rules:
 
 1. Respect the requested start time and end time.
 
-2. Use only the candidate places provided above.
+2. Use only candidate places provided above.
 
-3. Prefer places with stronger retrieval scores when they also fit the
-   overall itinerary.
+3. Prefer places with stronger retrieval scores when they also fit the overall
+   itinerary.
 
 4. Prioritize places matching the user's interests, group type, walking
    tolerance, neighborhood preferences, and indoor/outdoor preference.
@@ -147,39 +185,58 @@ Follow these rules:
 
 6. Include anything under must_include whenever a matching candidate exists.
 
-7. Use each selected place at most once.
+7. Use each provider_id at most once.
 
-8. Use each place's typical_visit_minutes when estimating how long a stop
-   should last.
+8. Use each candidate's typical_visit_minutes as the primary estimate for stop
+   duration.
 
-9. Keep the itinerary geographically sensible. Avoid unnecessary travel
-   between distant neighborhoods.
+9. Never artificially extend a stop far beyond its typical visit duration just
+   to fill the requested trip window.
 
-10. Account for the user's start location and end location when choosing the
+10. If useful candidate activities do not fill the entire requested window,
+    leave reasonable free time rather than fabricating duration.
+
+11. Keep the itinerary geographically sensible and avoid unnecessary travel
+    between distant neighborhoods.
+
+12. Account for the user's start location and end location when choosing the
     overall sequence.
 
-11. Do not create an overly packed itinerary. Leave reasonable transition
-    time between stops.
+13. Do not create an overly packed itinerary. Leave reasonable transition time
+    between stops.
 
-12. If walking tolerance is limited or minimal, strongly favor compact routes
+14. If walking tolerance is limited or minimal, strongly favor compact routes
     and places requiring minimal walking.
 
-13. Consider public transit accessibility when ordering places.
+15. Consider public transit accessibility when ordering places.
 
-14. Prefer an enjoyable variety of activities rather than scheduling many
+16. Prefer an enjoyable variety of activities rather than scheduling many
     highly similar stops consecutively.
 
-15. Respect known opening hours when they are provided. If hours are unknown,
-    do not invent them.
+17. Respect known opening hours when provided. If hours are unknown, do not
+    invent them.
 
-16. Treat the result as a draft itinerary. Do not claim that uncertain
-    operational details such as current hours, reservations, or transit
-    conditions have been verified unless that information was provided.
+18. Treat the result as a draft itinerary. Do not claim uncertain operational
+    details such as current hours, reservations, or transit conditions have
+    been verified unless that information was provided.
 
-17. Give each stop a concise reason explaining why it fits this specific
-    user's trip.
+19. Give each stop a concise reason explaining why it fits this user's trip.
 
-18. Arrival and departure times must use 24-hour HH:MM format.
+20. Arrival and departure times must use 24-hour HH:MM format.
+
+21. Never invent a restaurant, cafe, attraction, landmark, or provider_id.
+
+22. If dietary preferences are specified and a compatible restaurant or cafe
+    exists in the candidate list, include one of those candidates.
+
+23. Do not treat a generic cafe or restaurant as satisfying a dietary
+    preference unless its metadata explicitly supports that preference.
+
+24. Prefer food venues whose tags directly match the user's dietary
+    preferences.
+
+25. Do not describe a food venue as dietary-compatible unless that preference
+    is explicitly supported by its candidate tags.
 
 Return a DraftItinerary matching the required structured output schema.
 """.strip()

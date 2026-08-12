@@ -16,8 +16,9 @@ DATASET_PATH = (
 SEARCH_CATEGORIES = [
     "entertainment.museum",
     "leisure.park",
-    "catering.cafe",
+    "tourism.sights",
     "catering.restaurant",
+    "catering.cafe",
 ]
 EXCLUDED_NAMES = {
     "starbucks",

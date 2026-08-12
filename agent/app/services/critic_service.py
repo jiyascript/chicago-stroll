@@ -8,7 +8,13 @@ from app.schemas import (
     TripRequest,
     RetrievedPlace
 )
-
+def normalize_values(
+    values: list[str],
+) -> set[str]:
+    return {
+        value.strip().lower()
+        for value in values
+    }
 
 TIME_FORMAT = "%H:%M"
 
@@ -21,24 +27,6 @@ def parse_time(value: str) -> datetime:
         TIME_FORMAT,
     )
 
-def critique_itinerary(
-    request: TripRequest,
-    itinerary: DraftItinerary,
-    candidates: list[RetrievedPlace],
-) -> CritiqueResult:
-    issues: list[str] = []
-    warnings: list[str] = []
-
-    candidate_ids = {
-        candidate.place.provider_id
-        for candidate in candidates
-    }
-
-    for stop in itinerary.stops:
-        if stop.place.provider_id not in candidate_ids:
-            issues.append(
-                f"{stop.place.name} was not provided by the retrieval system."
-            )
 def critique_itinerary(
     request: TripRequest,
     itinerary: DraftItinerary,
@@ -173,29 +161,80 @@ def critique_itinerary(
             )
 
     # 7. Missing food stop for dietary needs.
+    
     if request.dietary_preferences:
-        dietary = {
-            preference.lower()
-            for preference in request.dietary_preferences
-        }
-
-        compatible_food_stop = any(
-            stop.place.category in {
-                "restaurant",
-                "cafe",
-            }
-            and dietary.intersection(
-                {
-                    tag.lower()
-                    for tag in stop.place.tags
-                }
-            )
-            for stop in itinerary.stops
+        dietary = normalize_values(
+            request.dietary_preferences
         )
 
-        if not compatible_food_stop:
+        compatible_food_candidates = [
+            candidate
+            for candidate in candidates
+            if (
+                candidate.place.category
+                in {"restaurant", "cafe"}
+                and dietary.intersection(
+                    normalize_values(
+                        candidate.place.tags
+                    )
+                )
+            )
+        ]
+
+        # Only require a compatible meal if
+        # retrieval actually found one.
+        if compatible_food_candidates:
+            compatible_food_stop = any(
+                stop.place.category
+                in {"restaurant", "cafe"}
+                and dietary.intersection(
+                    normalize_values(
+                        stop.place.tags
+                    )
+                )
+                for stop in itinerary.stops
+            )
+
+            if not compatible_food_stop:
+                issues.append(
+                    "Compatible dietary food candidates were retrieved, "
+                    "but the itinerary does not include one."
+                )
+    # Stop duration sanity.
+    for stop in itinerary.stops:
+        arrival = parse_time(
+            stop.arrival_time
+        )
+
+        departure = parse_time(
+            stop.departure_time
+        )
+
+        actual_minutes = int(
+            (
+                departure - arrival
+            ).total_seconds()
+            / 60
+        )
+
+        expected_minutes = (
+            stop.place.typical_visit_minutes
+        )
+
+        # Allow some flexibility, but prevent the
+        # repair agent from stretching stops unrealistically.
+        max_reasonable_minutes = max(
+            expected_minutes * 2,
+            expected_minutes + 60,
+        )
+
+        if actual_minutes > max_reasonable_minutes:
             issues.append(
-                "The itinerary does not include a food stop matching the user's dietary preferences."
+                (
+                    f"{stop.place.name} is scheduled for "
+                    f"{actual_minutes} minutes, but its typical "
+                    f"visit duration is {expected_minutes} minutes."
+                )
             )
 
     return CritiqueResult(

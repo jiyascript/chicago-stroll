@@ -11,15 +11,19 @@ from app.services.critic_service import critique_itinerary
 def make_place(
     name: str,
     category: str = "museum",
+    tags: list[str] | None = None,
 ) -> Place:
     return Place(
-        provider_id=name,
+        provider_id=name.lower().replace(
+            " ",
+            "-",
+        ),
         name=name,
         category=category,
         ambiance=["local"],
         neighborhood="Loop",
         description="Test place.",
-        tags=[],
+        tags=tags or [],
         price_tier="free",
         typical_visit_minutes=60,
         best_time_of_day="any",
@@ -49,14 +53,22 @@ def test_critic_flags_missing_food_stop() -> None:
         dietary_preferences=["vegetarian"],
     )
 
-    museum = make_place("Museum A")
+    museum = make_place(
+        "Museum A"
+    )
+
+    vegetarian_restaurant = make_place(
+        "Vegetarian Restaurant",
+        category="restaurant",
+        tags=["vegetarian"],
+    )
 
     itinerary = DraftItinerary(
         title="Test Day",
         summary="Test itinerary.",
         stops=[
             ItineraryStop(
-                place=museum,
+                provider_id=museum.provider_id,
                 arrival_time="11:00",
                 departure_time="12:00",
                 reason="Test.",
@@ -69,19 +81,32 @@ def test_critic_flags_missing_food_stop() -> None:
             place=museum,
             score=10.0,
             matched_tags=[],
-            retrieval_reasons=["Test candidate"],
-        )
+            retrieval_reasons=[
+                "Test candidate"
+            ],
+        ),
+        RetrievedPlace(
+            place=vegetarian_restaurant,
+            score=9.0,
+            matched_tags=[
+                "vegetarian"
+            ],
+            retrieval_reasons=[
+                "Matches dietary preferences"
+            ],
+        ),
     ]
 
     result = critique_itinerary(
         request=request,
         itinerary=itinerary,
-        candidates=candidates
+        candidates=candidates,
     )
 
     assert result.is_valid is False
 
     assert any(
-        "food stop" in issue
+        "dietary" in issue.lower()
+        or "food" in issue.lower()
         for issue in result.issues
     )

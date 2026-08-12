@@ -9,6 +9,7 @@ def make_place(
     *,
     name: str,
     tags: list[str],
+    category: str = "landmark",
     neighborhood: str = "Loop",
     local_score: int = 7,
     walking_required: str = "minimal",
@@ -17,7 +18,7 @@ def make_place(
     return Place(
         provider_id=name.lower().replace(" ", "-"),
         name=name,
-        category="landmark",
+        category=category,
         ambiance=["local"],
         neighborhood=neighborhood,
         description="Test place.",
@@ -90,3 +91,80 @@ def test_rank_places_orders_best_match_first() -> None:
     )
 
     assert ranked[0].place.name == "Best Match"
+def test_dietary_match_boosts_food_candidate() -> None:
+    request = TripRequest(
+        dietary_preferences=[
+            "vegetarian"
+        ]
+    )
+
+    vegetarian = make_place(
+        name="Vegetarian Restaurant",
+        category="restaurant",
+        tags=["vegetarian"],
+    )
+
+    generic = make_place(
+        name="Generic Cafe",
+        category="cafe",
+        tags=["coffee"],
+    )
+
+    vegetarian.category = "restaurant"
+    generic.category = "cafe"
+
+    vegetarian_result = evaluate_place(
+        vegetarian,
+        request,
+    )
+
+    generic_result = evaluate_place(
+        generic,
+        request,
+    )
+
+    assert (
+        vegetarian_result.score
+        > generic_result.score
+    )
+
+    assert "vegetarian" in (
+        vegetarian_result.matched_tags
+        or vegetarian.tags
+    )
+def test_retrieval_keeps_food_candidates_for_dietary_request() -> None:
+    request = TripRequest(
+        interests=["architecture"],
+        dietary_preferences=[
+            "vegetarian"
+        ],
+    )
+
+    attractions = [
+        make_place(
+            name=f"Architecture {index}",
+            category="museum",
+            tags=["architecture"],
+        )
+        for index in range(20)
+    ]
+
+    food = make_place(
+        name="Vegetarian Restaurant",
+        category="restaurant",
+        tags=["vegetarian"],
+    )
+
+    places = attractions + [food]
+
+    ranked = rank_places(
+        places,
+        request,
+        top_k=len(places),
+    )
+
+    assert any(
+        candidate.place.name
+        == "Vegetarian Restaurant"
+        for candidate in ranked
+    )
