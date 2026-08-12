@@ -13,3 +13,4 @@ class PlannerState(TypedDict):
     ready_for_research: NotRequired[bool]
     retrieved_places: NotRequired[list[dict]]
     draft_itinerary: NotRequired[DraftItinerary]
+    critique_result: NotRequired[dict]

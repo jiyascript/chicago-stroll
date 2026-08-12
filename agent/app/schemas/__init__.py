@@ -8,4 +8,5 @@ from app.schemas.retrieved_place import RetrievedPlace
 from app.schemas.draft_itinerary import DraftItinerary
 from app.schemas.itinerary_stop import ItineraryStop
 from app.schemas.planner_context import PlannerContext
-__all__ = ["PlannerContext","PlaceEnrichment","RawPlace","TripRequest", "TripRequestUpdate", "Place", "RetrievedPlace", "ItineraryStop", "DraftItinerary"]
+from app.schemas.critique_result import CritiqueResult
+__all__ = ["CritiqueResult","PlannerContext","PlaceEnrichment","RawPlace","TripRequest", "TripRequestUpdate", "Place", "RetrievedPlace", "ItineraryStop", "DraftItinerary"]
