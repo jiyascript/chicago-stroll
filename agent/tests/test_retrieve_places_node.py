@@ -95,9 +95,13 @@ def test_retrieve_places_node_updates_state(
     assert "retrieved_places" in result
     assert len(result["retrieved_places"]) == 1
 
-    candidate = result["retrieved_places"][0]
+    candidate = RetrievedPlace.model_validate(
+        result["retrieved_places"][0]
+    )
 
     assert candidate.place.name == "Test Architecture Museum"
+    assert candidate.score == 12.0
+    assert candidate.matched_tags == ["architecture"]
     assert candidate.score == 12.0
     assert candidate.matched_tags == ["architecture"]
 

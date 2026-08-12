@@ -1,14 +1,13 @@
-"""Deterministic scoring for Chicago place retrieval."""
-from app.schemas import Place, TripRequest
-from app.repositories import PlaceRepository
+"""Deterministic scoring and explainable retrieval for Chicago places."""
 
-PRICE_ORDER = {
-    "free": 0,
-    "$": 1,
-    "$$": 2,
-    "$$$": 3,
-    "$$$$": 4,
-}
+from app.repositories import PlaceRepository
+from app.schemas import (
+    Place,
+    RetrievedPlace,
+    TripRequest,
+)
+
+
 WALKING_ORDER = {
     "minimal": 0,
     "moderate": 1,
@@ -16,9 +15,14 @@ WALKING_ORDER = {
 }
 
 
-def score_place(place: Place,request: TripRequest,) -> float:
-    """Score how well a place matches a trip request."""
+def evaluate_place(
+    place: Place,
+    request: TripRequest,
+) -> RetrievedPlace:
+    """Score a place and record why it matches the trip."""
+
     score = 0.0
+    reasons: list[str] = []
 
     requested_interests = {
         interest.lower()
@@ -30,11 +34,18 @@ def score_place(place: Place,request: TripRequest,) -> float:
         for tag in place.tags
     }
 
-    # Strong signal: interests.
-    interest_matches = requested_interests & place_tags
-    score += 5 * len(interest_matches)
+    matched_tags = sorted(
+        requested_interests & place_tags
+    )
 
-    # Preferred neighborhood.
+    if matched_tags:
+        score += 5 * len(matched_tags)
+
+        reasons.append(
+            "Matches requested interests: "
+            + ", ".join(matched_tags)
+        )
+
     preferred = {
         neighborhood.lower()
         for neighborhood in request.preferred_neighborhoods
@@ -42,8 +53,10 @@ def score_place(place: Place,request: TripRequest,) -> float:
 
     if place.neighborhood.lower() in preferred:
         score += 3
+        reasons.append(
+            "Located in a preferred neighborhood"
+        )
 
-    # Explicit exclusions are hard penalties.
     excluded = {
         neighborhood.lower()
         for neighborhood in request.excluded_neighborhoods
@@ -51,25 +64,34 @@ def score_place(place: Place,request: TripRequest,) -> float:
 
     if place.neighborhood.lower() in excluded:
         score -= 100
+        reasons.append(
+            "Located in an excluded neighborhood"
+        )
 
-    # Group suitability.
     if (
         request.group_type
         and request.group_type in place.group_friendly
     ):
         score += 2
+        reasons.append(
+            f"Suitable for {request.group_type} groups"
+        )
 
-    # Indoor/outdoor preference.
     if request.indoor_outdoor_preference:
         if (
             place.indoor_outdoor
             == request.indoor_outdoor_preference
         ):
             score += 2
+            reasons.append(
+                "Matches indoor/outdoor preference"
+            )
         elif place.indoor_outdoor == "mixed":
             score += 1
+            reasons.append(
+                "Offers mixed indoor/outdoor activity"
+            )
 
-    # Walking compatibility.
     if request.walking_tolerance:
         tolerance_map = {
             "minimal": 0,
@@ -88,45 +110,75 @@ def score_place(place: Place,request: TripRequest,) -> float:
 
         if required <= allowed:
             score += 2
+            reasons.append(
+                "Compatible with walking tolerance"
+            )
         else:
             score -= 4
+            reasons.append(
+                "Requires more walking than preferred"
+            )
 
-    # Transit-friendly bonus.
     if place.transit_access == "excellent":
         score += 2
+        reasons.append(
+            "Excellent public transit access"
+        )
+
     elif place.transit_access == "good":
         score += 1
+        reasons.append(
+            "Good public transit access"
+        )
 
-    # Reward distinctively Chicago places.
-    score += place.local_score / 5
+    local_bonus = place.local_score / 5
+    score += local_bonus
 
-    return score
-def rank_places(places: list[Place],request: TripRequest,top_k: int = 15,) -> list[tuple[Place, float]]:
-    """Rank places by request compatibility."""
+    if place.local_score >= 8:
+        reasons.append(
+            "Strong Chicago-specific experience"
+        )
 
-    scored = [
-        (
-            place,
-            score_place(
-                place=place,
-                request=request,
-            ),
+    return RetrievedPlace(
+        place=place,
+        score=score,
+        matched_tags=matched_tags,
+        retrieval_reasons=reasons,
+    )
+
+
+def rank_places(
+    places: list[Place],
+    request: TripRequest,
+    top_k: int = 15,
+) -> list[RetrievedPlace]:
+    """Rank places by compatibility with the trip."""
+
+    ranked = [
+        evaluate_place(
+            place=place,
+            request=request,
         )
         for place in places
     ]
 
-    scored.sort(
-        key=lambda item: item[1],
+    ranked.sort(
+        key=lambda candidate: candidate.score,
         reverse=True,
     )
 
-    return scored[:top_k]
+    return ranked[:top_k]
 
-def retrieve_places(repository: PlaceRepository, request: TripRequest, top_k: int=15,) -> list[Place]:
-    """Retrieve the highest scoring places for a trip"""
-    ranked = rank_places(
+
+def retrieve_places(
+    repository: PlaceRepository,
+    request: TripRequest,
+    top_k: int = 15,
+) -> list[RetrievedPlace]:
+    """Retrieve the best candidate places for a trip."""
+
+    return rank_places(
         places=repository.all(),
         request=request,
         top_k=top_k,
     )
-    return [place for place, _ in ranked]

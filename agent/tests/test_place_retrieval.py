@@ -1,7 +1,7 @@
 from app.schemas import Place, TripRequest
 from app.services.place_retrieval import (
     rank_places,
-    score_place,
+    evaluate_place,
 )
 
 
@@ -58,13 +58,7 @@ def test_interest_match_increases_score() -> None:
         tags=["food"],
     )
 
-    assert score_place(
-        matching,
-        request,
-    ) > score_place(
-        unrelated,
-        request,
-    )
+    assert evaluate_place(matching,request,).score > evaluate_place(unrelated,request,).score
 
 
 def test_rank_places_orders_best_match_first() -> None:
@@ -95,4 +89,4 @@ def test_rank_places_orders_best_match_first() -> None:
         top_k=2,
     )
 
-    assert ranked[0][0].name == "Best Match"
+    assert ranked[0].place.name == "Best Match"

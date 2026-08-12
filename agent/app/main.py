@@ -1,7 +1,7 @@
 """Run a multi-turn Chicago Stroll conversation."""
 
 from app.graph import create_planner_graph
-from app.schemas import TripRequest
+from app.schemas import TripRequest, DraftItinerary, RetrievedPlace
 
 
 def main() -> None:
@@ -53,19 +53,29 @@ def main() -> None:
         "Ready:",
         second_result.get("ready_for_research"),
     )
-    retrieved = second_result[
-        "retrieved_places"
-    ]
+    retrieved = second_result.get(
+        "retrieved_places",
+        [],
+    )
 
-    print()
+    print("\nTop candidates:")
 
-    print("Top candidates:")
+    for candidate_data in retrieved[:5]:
+        candidate = RetrievedPlace.model_validate(
+            candidate_data
+        )
 
-    for candidate in retrieved[:5]:
         print(
             candidate.place.name,
             candidate.score,
-        )   
+        )
+    draft= DraftItinerary.model_validate(second_result["draft_itinerary"])
+    print("\n===== DRAFT ITINERARY =====")
+
+    if draft is None:
+        print("No itinerary generated.")
+    else:
+        print(draft.model_dump_json(indent=2))
 
 if __name__ == "__main__":
     main()

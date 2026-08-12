@@ -18,5 +18,8 @@ def retrieve_places_node(state: PlannerState,) -> dict:
     )
 
     return {
-        "retrieved_places": candidates,
+        "retrieved_places": [
+            candidate.model_dump(mode="json")
+            for candidate in candidates
+        ],
     }

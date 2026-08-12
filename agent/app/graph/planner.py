@@ -9,7 +9,8 @@ from app.nodes import (
     create_clarification,
     ready_for_research,
     update_request,
-    retrieved_places_node
+    retrieve_places_node,
+    planner_node
 )
 from app.state import PlannerState
 
@@ -22,13 +23,15 @@ def create_planner_graph():
     builder.add_node("check_completeness", check_completeness)
     builder.add_node("create_clarification", create_clarification)
     builder.add_node("ready_for_research", ready_for_research)
-    builder.add_node("retrieve_places", retrieved_places_node)
+    builder.add_node("retrieve_places", retrieve_places_node)
+    builder.add_node("planner", planner_node)
     builder.add_conditional_edges(START,route_initial_request,)
     builder.add_edge("parse_request","check_completeness",)
     builder.add_edge("update_request","check_completeness",)
     builder.add_conditional_edges("check_completeness",route_after_completeness,)
     builder.add_edge("create_clarification", END,)
     builder.add_edge("ready_for_research","retrieve_places")
-    builder.add_edge("retrieve_places", END,)
+    builder.add_edge("retrieve_places", "planner",)
+    builder.add_edge("planner", END)
     checkpointer = InMemorySaver()
     return builder.compile(checkpointer=checkpointer,)
