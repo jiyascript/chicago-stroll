@@ -1,16 +1,16 @@
 """Shared state for the Chicago Stroll planning workflow"""
 
 from typing import TypedDict, NotRequired
-from app.schemas import RetrievedPlace, DraftItinerary, TripRequest
 
 class PlannerState(TypedDict):
     """Information shared between every LangGraph node."""
 
     user_message: str
-    trip_request: NotRequired[TripRequest | None]
+    trip_request: NotRequired[dict | None]
     missing_fields: NotRequired[list[str]]
     clarification_question: NotRequired[str | None]
     ready_for_research: NotRequired[bool]
     retrieved_places: NotRequired[list[dict]]
-    draft_itinerary: NotRequired[DraftItinerary]
+    draft_itinerary: NotRequired[dict]
     critique_result: NotRequired[dict]
+    repair_count: NotRequired[int]

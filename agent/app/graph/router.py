@@ -18,3 +18,12 @@ def route_after_completeness(state: PlannerState) -> Literal["create_clarificati
     if state["missing_fields"]:
         return "create_clarification"
     return "ready_for_research"
+
+MAX_REPAIRS = 2
+def route_after_critic(state: PlannerState):
+    critique = state["critique_result"]
+
+    if critique["is_valid"]:
+        return "finished"
+
+    return "repair"

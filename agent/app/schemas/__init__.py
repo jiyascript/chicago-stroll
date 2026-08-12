@@ -9,4 +9,5 @@ from app.schemas.draft_itinerary import DraftItinerary
 from app.schemas.itinerary_stop import ItineraryStop
 from app.schemas.planner_context import PlannerContext
 from app.schemas.critique_result import CritiqueResult
-__all__ = ["CritiqueResult","PlannerContext","PlaceEnrichment","RawPlace","TripRequest", "TripRequestUpdate", "Place", "RetrievedPlace", "ItineraryStop", "DraftItinerary"]
+from app.schemas.repair_context import RepairContext
+__all__ = ["CritiqueResult","RepairContext","PlannerContext","PlaceEnrichment","RawPlace","TripRequest", "TripRequestUpdate", "Place", "RetrievedPlace", "ItineraryStop", "DraftItinerary"]

@@ -3,6 +3,7 @@ from app.schemas import (
     ItineraryStop,
     Place,
     TripRequest,
+    RetrievedPlace
 )
 from app.services.critic_service import critique_itinerary
 
@@ -48,12 +49,14 @@ def test_critic_flags_missing_food_stop() -> None:
         dietary_preferences=["vegetarian"],
     )
 
+    museum = make_place("Museum A")
+
     itinerary = DraftItinerary(
         title="Test Day",
         summary="Test itinerary.",
         stops=[
             ItineraryStop(
-                place=make_place("Museum A"),
+                place=museum,
                 arrival_time="11:00",
                 departure_time="12:00",
                 reason="Test.",
@@ -61,9 +64,19 @@ def test_critic_flags_missing_food_stop() -> None:
         ],
     )
 
+    candidates = [
+        RetrievedPlace(
+            place=museum,
+            score=10.0,
+            matched_tags=[],
+            retrieval_reasons=["Test candidate"],
+        )
+    ]
+
     result = critique_itinerary(
         request=request,
         itinerary=itinerary,
+        candidates=candidates
     )
 
     assert result.is_valid is False

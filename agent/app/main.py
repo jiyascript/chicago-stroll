@@ -1,7 +1,7 @@
 """Run a multi-turn Chicago Stroll conversation."""
 
 from app.graph import create_planner_graph
-from app.schemas import TripRequest, DraftItinerary, RetrievedPlace
+from app.schemas import TripRequest, DraftItinerary, RetrievedPlace, CritiqueResult
 
 
 def main() -> None:
@@ -76,6 +76,14 @@ def main() -> None:
         print("No itinerary generated.")
     else:
         print(draft.model_dump_json(indent=2))
+    print("\n===== CRITIQUE =====")
+    print(second_result.get("critique_result"))
+
+    print(
+        "\nRepair count:",
+        second_result.get("repair_count", 0),
+    )
+    
 
 if __name__ == "__main__":
     main()

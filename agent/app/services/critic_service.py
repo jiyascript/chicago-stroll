@@ -6,6 +6,7 @@ from app.schemas import (
     CritiqueResult,
     DraftItinerary,
     TripRequest,
+    RetrievedPlace
 )
 
 
@@ -20,10 +21,28 @@ def parse_time(value: str) -> datetime:
         TIME_FORMAT,
     )
 
-
 def critique_itinerary(
     request: TripRequest,
     itinerary: DraftItinerary,
+    candidates: list[RetrievedPlace],
+) -> CritiqueResult:
+    issues: list[str] = []
+    warnings: list[str] = []
+
+    candidate_ids = {
+        candidate.place.provider_id
+        for candidate in candidates
+    }
+
+    for stop in itinerary.stops:
+        if stop.place.provider_id not in candidate_ids:
+            issues.append(
+                f"{stop.place.name} was not provided by the retrieval system."
+            )
+def critique_itinerary(
+    request: TripRequest,
+    itinerary: DraftItinerary,
+    candidates: list[RetrievedPlace],
 ) -> CritiqueResult:
     """Validate an itinerary against user constraints."""
 
@@ -93,11 +112,8 @@ def critique_itinerary(
         )
 
         if unused_minutes >= 90:
-            warnings.append(
-                (
-                    "The itinerary ends significantly before "
-                    "the requested end time."
-                )
+            issues.append(
+                "The itinerary ends significantly before the requested end time."
             )
 
     # 4. Stop ordering / overlap.
@@ -158,22 +174,28 @@ def critique_itinerary(
 
     # 7. Missing food stop for dietary needs.
     if request.dietary_preferences:
-        food_categories = {
-            "restaurant",
-            "cafe",
+        dietary = {
+            preference.lower()
+            for preference in request.dietary_preferences
         }
 
-        has_food_stop = any(
-            stop.place.category in food_categories
+        compatible_food_stop = any(
+            stop.place.category in {
+                "restaurant",
+                "cafe",
+            }
+            and dietary.intersection(
+                {
+                    tag.lower()
+                    for tag in stop.place.tags
+                }
+            )
             for stop in itinerary.stops
         )
 
-        if not has_food_stop:
+        if not compatible_food_stop:
             issues.append(
-                (
-                    "The itinerary does not include a food stop "
-                    "despite dietary preferences being specified."
-                )
+                "The itinerary does not include a food stop matching the user's dietary preferences."
             )
 
     return CritiqueResult(
