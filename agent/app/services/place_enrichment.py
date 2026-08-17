@@ -1,6 +1,7 @@
 """LLM enrichment for normalized Chicago place records."""
 
 from langchain_core.messages import HumanMessage, SystemMessage
+
 from app.config import create_model
 from app.schemas import PlaceEnrichment, RawPlace
 
@@ -27,6 +28,23 @@ Produce planner-oriented metadata such as:
 - why the place is worth visiting
 - whether a reservation is usually required
 
+TAG RULES:
+- Tags should be useful for itinerary retrieval and matching user preferences.
+- Include relevant concepts such as architecture, history, art, coffee,
+  pizza, nightlife, family-friendly activities, or similar meaningful traits.
+- For restaurants and cafes, include dietary compatibility when it is
+  explicitly supported by the provided information.
+- Useful dietary tags may include:
+  vegetarian
+  vegan
+  gluten-free
+  halal
+  kosher
+- Do not infer or invent dietary compatibility when the provided information
+  does not support it.
+- Do not label a generic restaurant or cafe as vegetarian or vegan merely
+  because it may offer some suitable menu items.
+
 Rules:
 - Do not invent addresses, websites, coordinates, or opening hours.
 - Use only allowed enum values.
@@ -37,17 +55,26 @@ Rules:
 """
 
 
-def enrich_place(raw_place: RawPlace) -> PlaceEnrichment:
+def enrich_place(
+    raw_place: RawPlace,
+) -> PlaceEnrichment:
     """Generate planning metadata for one normalized place."""
 
     model = create_model()
-    enrichment_model = model.with_structured_output(PlaceEnrichment)
+
+    enrichment_model = model.with_structured_output(
+        PlaceEnrichment
+    )
 
     return enrichment_model.invoke(
         [
-            SystemMessage(content=SYSTEM_PROMPT),
+            SystemMessage(
+                content=SYSTEM_PROMPT
+            ),
             HumanMessage(
-                content=raw_place.model_dump_json(indent=2)
+                content=raw_place.model_dump_json(
+                    indent=2
+                )
             ),
         ]
     )

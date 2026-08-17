@@ -949,5 +949,1126 @@
       "catering.cafe"
     ],
     "source_opening_hours": "Mo-Fr 07:30-15:30"
+  },
+  "51bab5f1cc70e855c0599edacf189cf04440f00103f9010530f6920000000092031c486f6d6520496e737572616e6365204275696c64696e672053697465": {
+    "name": "Home Insurance Building Site",
+    "category": "landmark",
+    "ambiance": [
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "The historical site of the Home Insurance Building, widely recognized as the world's first skyscraper utilizing a structural steel frame.",
+    "tags": [
+      "architecture",
+      "history",
+      "loop",
+      "skyscraper"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 15,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 8,
+    "why_visit": "It marks the birthplace of the modern skyscraper, making it a must-see for architecture and history enthusiasts exploring the Loop.",
+    "provider_id": "51bab5f1cc70e855c0599edacf189cf04440f00103f9010530f6920000000092031c486f6d6520496e737572616e6365204275696c64696e672053697465",
+    "address": "Home Insurance Building Site, 135 South LaSalle Street, Chicago, IL 60603, United States of America",
+    "longitude": -87.6318848,
+    "latitude": 41.8797637,
+    "source_categories": [
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.memorial"
+    ],
+    "source_opening_hours": null
+  },
+  "5153a3a1902ee855c0598a35012b2cf04440f00103f9016ef426c7020000009203174d61796f72204861726f6c642057617368696e67746f6e": {
+    "name": "Mayor Harold Washington",
+    "category": "landmark",
+    "ambiance": [
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A memorial dedicated to Harold Washington, the first African American mayor of Chicago, located in the Loop.",
+    "tags": [
+      "history",
+      "memorial",
+      "politics",
+      "public art"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 15,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "sunny",
+      "cold"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 8,
+    "why_visit": "Explore a piece of Chicago's political history and honor the legacy of one of its most influential mayors.",
+    "provider_id": "5153a3a1902ee855c0598a35012b2cf04440f00103f9016ef426c7020000009203174d61796f72204861726f6c642057617368696e67746f6e",
+    "address": "Mayor Harold Washington, 400 South State Street, Chicago, IL 60605, United States of America",
+    "longitude": -87.6278421,
+    "latitude": 41.8763479,
+    "source_categories": [
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.memorial"
+    ],
+    "source_opening_hours": null
+  },
+  "5154ce7234a2e855c059b273e492f4ef4440f00103f901a345aca0010000009203164f73636172204f2e204427416e67656c6f205061726b": {
+    "name": "Oscar O. D'Angelo Park",
+    "category": "park",
+    "ambiance": [
+      "quiet",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A small neighborhood park located in the Loop, serving as a quiet urban retreat and memorial space.",
+    "tags": [
+      "memorial",
+      "neighborhood space",
+      "outdoor",
+      "park"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "sunny"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "good",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 5,
+    "why_visit": "A peaceful spot to take a quick break, enjoy some fresh air, and experience a quiet corner of the busy Loop.",
+    "provider_id": "5154ce7234a2e855c059b273e492f4ef4440f00103f901a345aca0010000009203164f73636172204f2e204427416e67656c6f205061726b",
+    "address": "Oscar O. D'Angelo Park, South Franklin Street, Chicago, IL 60699, United States of America",
+    "longitude": -87.6349002,
+    "latitude": 41.8746513,
+    "source_categories": [
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.memorial"
+    ],
+    "source_opening_hours": null
+  },
+  "51c7362a3a4de855c0597293acf419f14440f00102f9013d3010460000000092030d457465726e616c20466c616d65": {
+    "name": "Eternal Flame",
+    "category": "landmark",
+    "ambiance": [
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "An eternal flame monument located in Daley Plaza in the Loop, serving as a memorial.",
+    "tags": [
+      "history",
+      "memorial",
+      "monument",
+      "public art"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 15,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "kids"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 7,
+    "why_visit": "Visit this poignant public memorial situated in the heart of Daley Plaza.",
+    "provider_id": "51c7362a3a4de855c0597293acf419f14440f00102f9013d3010460000000092030d457465726e616c20466c616d65",
+    "address": "Eternal Flame, Daley Plaza, Chicago, IL 60602, United States of America",
+    "longitude": -87.62971357462366,
+    "latitude": 41.88360460688172,
+    "source_categories": [
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.memorial"
+    ],
+    "source_opening_hours": null
+  },
+  "517a38191ed5e855c0593a284c8a52f04440f00101f901213a0c0100000000920314546865204a61636b6b6e69666520427269646765": {
+    "name": "The Jackknife Bridge",
+    "category": "landmark",
+    "ambiance": [
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Near West Side",
+    "description": "An iconic historical bridge located on the Near West Side of Chicago.",
+    "tags": [
+      "architecture",
+      "bridge",
+      "history",
+      "landmark"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "moderate",
+    "transit_access": "good",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 7,
+    "why_visit": "Experience Chicago's famous historic engineering and bridge architecture.",
+    "provider_id": "517a38191ed5e855c0593a284c8a52f04440f00101f901213a0c0100000000920314546865204a61636b6b6e69666520427269646765",
+    "address": "The Jackknife Bridge, West Jackson Boulevard, Chicago, IL 60675, United States of America",
+    "longitude": -87.63800766432715,
+    "latitude": 41.87751892775164,
+    "source_categories": [
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.ruines"
+    ],
+    "source_opening_hours": null
+  },
+  "51e723df5bc7e755c0599e2056244bf04440f00102f90109fc882d000000009203224162726168616d204c696e636f6c6e3a205468652048656164206f66205374617465": {
+    "name": "Abraham Lincoln: The Head of State",
+    "category": "landmark",
+    "ambiance": [
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A notable public memorial sculpture of Abraham Lincoln located in the Loop.",
+    "tags": [
+      "history",
+      "monument",
+      "public art",
+      "sculpture"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 15,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "kids",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 7,
+    "why_visit": "Explore historical public art and take in a classic Chicago downtown monument.",
+    "provider_id": "51e723df5bc7e755c0599e2056244bf04440f00102f90109fc882d000000009203224162726168616d204c696e636f6c6e3a205468652048656164206f66205374617465",
+    "address": "Abraham Lincoln: The Head of State, South Columbus Drive, Chicago, IL 60604, United States of America",
+    "longitude": -87.6215429,
+    "latitude": 41.87729315,
+    "source_categories": [
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.memorial"
+    ],
+    "source_opening_hours": null
+  },
+  "518126fba4c3e755c05912a26db796f04440f00102f901be7f9d2d000000009203234368696361676f2053746f636b2045786368616e67652054726164696e6720526f6f6d": {
+    "name": "Chicago Stock Exchange Trading Room",
+    "category": "landmark",
+    "ambiance": [
+      "historic",
+      "quiet",
+      "touristy"
+    ],
+    "neighborhood": "Loop",
+    "description": "The reconstructed Chicago Stock Exchange Trading Room, originally designed by Louis Sullivan and Dankmar Adler, showcasing historic architectural grandeur.",
+    "tags": [
+      "architecture",
+      "history",
+      "loop",
+      "louis sullivan"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 45,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "moderate",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 9,
+    "why_visit": "Explore a magnificent masterpiece of Chicago school architecture and experience the preserved ornamental trading room of the historic Chicago Stock Exchange.",
+    "provider_id": "518126fba4c3e755c05912a26db796f04440f00102f901be7f9d2d000000009203234368696361676f2053746f636b2045786368616e67652054726164696e6720526f6f6d",
+    "address": "Chicago Stock Exchange Trading Room, South Columbus Drive, Chicago, IL 60603, United States of America",
+    "longitude": -87.62131619001777,
+    "latitude": 41.87959950307062,
+    "source_categories": [
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.building"
+    ],
+    "source_opening_hours": null
+  },
+  "5100cc5dc9e7e755c059cf4fd27ccbef4440f00102f90131f9a52d0000000092032a537069726974206f66204d7573696320285468656f646f72652054686f6d6173204d656d6f7269616c29": {
+    "name": "Spirit of Music (Theodore Thomas Memorial)",
+    "category": "landmark",
+    "ambiance": [
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A bronze memorial sculpture dedicated to Theodore Thomas, the founder and first conductor of the Chicago Symphony Orchestra.",
+    "tags": [
+      "art",
+      "memorial",
+      "monument",
+      "music history",
+      "sculpture"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 15,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "sunny",
+      "cold"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "good",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.cpdit01.com/resources/planning-and-development.fountains-monuments-and-sculptures/Grant%20Park/Spirit%20of%20Music.pdf",
+    "local_score": 7,
+    "why_visit": "Explore Chicago's rich musical heritage and view a classic piece of public art honoring the founder of the Chicago Symphony Orchestra.",
+    "provider_id": "5100cc5dc9e7e755c059cf4fd27ccbef4440f00102f90131f9a52d0000000092032a537069726974206f66204d7573696320285468656f646f72652054686f6d6173204d656d6f7269616c29",
+    "address": "Spirit of Music (Theodore Thomas Memorial), East Balbo Drive, Chicago, IL 60604, United States of America",
+    "longitude": -87.6235221305833,
+    "latitude": 41.87339744824532,
+    "source_categories": [
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.memorial"
+    ],
+    "source_opening_hours": null
+  },
+  "5166f204adece755c0592ae660fe27f14440f00102f901bfa6c80d000000009203134d696c6c656e6e69756d204d6f6e756d656e74": {
+    "name": "Millennium Monument",
+    "category": "landmark",
+    "ambiance": [
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A historic neoclassical monument located in Wrigley Square in downtown Chicago, featuring a curving colonnade and inscriptions honoring contributors to Millennium Park.",
+    "tags": [
+      "architecture",
+      "history",
+      "monument",
+      "public square"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 15,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "kids"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 7,
+    "why_visit": "Explore a grand neoclassical architectural detail in the Loop and discover the names of those who helped build Millennium Park.",
+    "provider_id": "5166f204adece755c0592ae660fe27f14440f00102f901bfa6c80d000000009203134d696c6c656e6e69756d204d6f6e756d656e74",
+    "address": "Millennium Monument, Wrigley Square, Chicago, IL 60603, United States of America",
+    "longitude": -87.62382054789632,
+    "latitude": 41.88403300982857,
+    "source_categories": [
+      "building",
+      "building.historic",
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.memorial",
+      "tourism.sights.memorial.monument"
+    ],
+    "source_opening_hours": null
+  },
+  "51232d3afeb0e755c0592e7997e6b1f04440f00102f9017ef8892d0000000092031045647761726420422e204275746c6572": {
+    "name": "Edward B. Butler",
+    "category": "landmark",
+    "ambiance": [
+      "historic",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A memorial monument dedicated to Edward B. Butler located in the Loop.",
+    "tags": [
+      "memorial",
+      "monument",
+      "sight"
+    ],
+    "price_tier": "free",
+    "typical_visit_minutes": 15,
+    "best_time_of_day": "any",
+    "indoor_outdoor": "outdoor",
+    "weather_suitability": [
+      "sunny",
+      "cold"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "good",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "kids"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 6,
+    "why_visit": "Explore a piece of Chicago's public art and memorial history while wandering through the Loop.",
+    "provider_id": "51232d3afeb0e755c0592e7997e6b1f04440f00102f9017ef8892d0000000092031045647761726420422e204275746c6572",
+    "address": "Edward B. Butler, East Monroe Drive, Chicago, IL 60603, United States of America",
+    "longitude": -87.62017780000001,
+    "latitude": 41.8804291,
+    "source_categories": [
+      "tourism",
+      "tourism.sights",
+      "tourism.sights.memorial",
+      "tourism.sights.memorial.monument"
+    ],
+    "source_opening_hours": null
+  },
+  "510975ecfb4be855c0596654747f50f04440f00103f901dca4a82c0300000092031042697374726f204d6f6e61646e6f636b": {
+    "name": "Bistro Monadnock",
+    "category": "restaurant",
+    "ambiance": [
+      "historic",
+      "local",
+      "cozy"
+    ],
+    "neighborhood": "Loop",
+    "description": "A French bistro located in the historic Monadnock Building in Chicago's Loop.",
+    "tags": [
+      "bistro",
+      "food",
+      "french",
+      "loop"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 90,
+    "best_time_of_day": "evening",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": true,
+    "website": "https://www.bistromonadnock.com",
+    "local_score": 8,
+    "why_visit": "Experience classic French bistro fare set inside one of Chicago's most iconic historic architectural landmarks.",
+    "provider_id": "510975ecfb4be855c0596654747f50f04440f00103f901dca4a82c0300000092031042697374726f204d6f6e61646e6f636b",
+    "address": "Bistro Monadnock, 325 South Federal Street, Chicago, IL 60606, United States of America",
+    "longitude": -87.6296377,
+    "latitude": 41.8774566,
+    "source_categories": [
+      "catering",
+      "catering.restaurant",
+      "catering.restaurant.french"
+    ],
+    "source_opening_hours": null
+  },
+  "514a8227b238e855c0590f66d96651f04440f00102f901b74c65040000000092031850616e63686f277320526f6f66746f702043616e74696e61": {
+    "name": "Pancho's Rooftop Cantina",
+    "category": "restaurant",
+    "ambiance": [
+      "lively",
+      "trendy",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "Pancho's Rooftop Cantina offers rooftop dining with views of the Loop, serving Mexican cuisine and drinks in Chicago.",
+    "tags": [
+      "cantina",
+      "drinks",
+      "food",
+      "loop",
+      "mexican",
+      "rooftop"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 90,
+    "best_time_of_day": "evening",
+    "indoor_outdoor": "mixed",
+    "weather_suitability": [
+      "sunny"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "friends",
+      "couple",
+      "solo"
+    ],
+    "opening_hours": {},
+    "reservation_required": true,
+    "website": "https://plymouthgrill.com/",
+    "local_score": 7,
+    "why_visit": "Enjoy vibrant rooftop ambiance and Mexican fare in the heart of the Chicago Loop.",
+    "provider_id": "514a8227b238e855c0590f66d96651f04440f00102f901b74c65040000000092031850616e63686f277320526f6f66746f702043616e74696e61",
+    "address": "Pancho's Rooftop Cantina, 327 South Plymouth Court, Chicago, IL 60604, United States of America",
+    "longitude": -87.62846044405265,
+    "latitude": 41.8774841844098,
+    "source_categories": [
+      "building",
+      "building.catering",
+      "catering",
+      "catering.restaurant"
+    ],
+    "source_opening_hours": null
+  },
+  "51fa8f961469e855c05928dab0016cf04440f00103f901dd225de80200000092030d4e6166204e6166204772696c6c": {
+    "name": "Naf Naf Grill",
+    "category": "restaurant",
+    "ambiance": [
+      "lively",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "Fast-casual Middle Eastern restaurant in the Loop offering customizable pitas, bowls, and freshly baked pita bread.",
+    "tags": [
+      "falafel",
+      "fast-casual",
+      "food",
+      "lunch",
+      "middle eastern",
+      "shawarma"
+    ],
+    "price_tier": "$",
+    "typical_visit_minutes": 45,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.nafnafgrill.com/locations/#jump-lasalle",
+    "local_score": 4,
+    "why_visit": "Great for a quick, flavorful, and customizable Middle Eastern lunch in the downtown Loop area.",
+    "provider_id": "51fa8f961469e855c05928dab0016cf04440f00103f901dd225de80200000092030d4e6166204e6166204772696c6c",
+    "address": "Naf Naf Grill, 231 South LaSalle Street, Chicago, IL 60604, United States of America",
+    "longitude": -87.6314136,
+    "latitude": 41.8782961,
+    "source_categories": [
+      "catering",
+      "catering.restaurant"
+    ],
+    "source_opening_hours": "Mo-Th 10:00-15:00; Fr-Su off"
+  },
+  "515a338d8150e855c05937cc2b3295f04440f00103f9012268717801000000920308546865204d617271": {
+    "name": "The Marq",
+    "category": "restaurant",
+    "ambiance": [
+      "lively",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "The Marq is a dining establishment located in the Loop neighborhood of Chicago, offering catering and restaurant services.",
+    "tags": [
+      "dining",
+      "food",
+      "loop",
+      "restaurant"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 90,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.themarqchicago.com/",
+    "local_score": 5,
+    "why_visit": "Conveniently located in the Loop, it offers a great spot for a meal or business lunch while exploring downtown Chicago.",
+    "provider_id": "515a338d8150e855c05937cc2b3295f04440f00103f9012268717801000000920308546865204d617271",
+    "address": "The Marq, 60 West Adams Street, Chicago, IL 60603, United States of America",
+    "longitude": -87.6299137,
+    "latitude": 41.8795531,
+    "source_categories": [
+      "catering",
+      "catering.restaurant"
+    ],
+    "source_opening_hours": null
+  },
+  "51536ae51453e855c0597120240b98f04440f00103f901c87a5b220300000092030e53616666726f6e20537472656574": {
+    "name": "Saffron Street",
+    "category": "restaurant",
+    "ambiance": [
+      "local",
+      "lively"
+    ],
+    "neighborhood": "Loop",
+    "description": "An Indian restaurant located in the Loop neighborhood of Chicago.",
+    "tags": [
+      "dining",
+      "food",
+      "indian",
+      "restaurant"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 60,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "good",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 6,
+    "why_visit": "Enjoy authentic Indian cuisine right in the heart of the Chicago Loop.",
+    "provider_id": "51536ae51453e855c0597120240b98f04440f00103f901c87a5b220300000092030e53616666726f6e20537472656574",
+    "address": "Saffron Street, 125 South Clark Street, Chicago, IL 60604, United States of America",
+    "longitude": -87.6300709,
+    "latitude": 41.87964,
+    "source_categories": [
+      "catering",
+      "catering.restaurant",
+      "catering.restaurant.indian"
+    ],
+    "source_opening_hours": null
+  },
+  "51f5eb980439e855c059ab71db638ef04440f00103f901c036f015000000009203175468652042657267686f66662052657374617572616e74": {
+    "name": "The Berghoff Restaurant",
+    "category": "restaurant",
+    "ambiance": [
+      "historic",
+      "lively",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "Historic Chicago landmark restaurant in the Loop serving German cuisine and traditional brews.",
+    "tags": [
+      "beer",
+      "food",
+      "german",
+      "history",
+      "landmark",
+      "restaurant"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 90,
+    "best_time_of_day": "evening",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "family",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.theberghoff.com/",
+    "local_score": 9,
+    "why_visit": "Experience a historic Chicago institution in the Loop known for its classic German fare and old-world charm.",
+    "provider_id": "51f5eb980439e855c059ab71db638ef04440f00103f901c036f015000000009203175468652042657267686f66662052657374617572616e74",
+    "address": "The Berghoff Restaurant, 17 West Adams Street, Chicago, IL 60603, United States of America",
+    "longitude": -87.6284801,
+    "latitude": 41.8793454,
+    "source_categories": [
+      "catering",
+      "catering.restaurant",
+      "catering.restaurant.german"
+    ],
+    "source_opening_hours": "Mo-Fr 11:00-21:00; Sa 11:30-21:00"
+  },
+  "5128a0e46954e855c05952a51c8299f04440f00103f901c67a5b22030000009203093832204b696d626170": {
+    "name": "82 Kimbap",
+    "category": "restaurant",
+    "ambiance": [
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A Korean eatery located in the Loop, specializing in kimbap and catering services.",
+    "tags": [
+      "casual",
+      "food",
+      "kimbap",
+      "korean",
+      "lunch"
+    ],
+    "price_tier": "$",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "friends",
+      "family"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 6,
+    "why_visit": "Great spot in the Loop for a quick and authentic Korean kimbap meal.",
+    "provider_id": "5128a0e46954e855c05952a51c8299f04440f00103f901c67a5b22030000009203093832204b696d626170",
+    "address": "82 Kimbap, 125 South Clark Street, Chicago, IL 60604, United States of America",
+    "longitude": -87.6301522,
+    "latitude": 41.8796847,
+    "source_categories": [
+      "catering",
+      "catering.restaurant",
+      "catering.restaurant.korean",
+      "wheelchair",
+      "wheelchair.yes"
+    ],
+    "source_opening_hours": null
+  },
+  "516f2f698c56e855c059b7c6b13f9af04440f00103f901fab87a8c0100000092030544616e6b65": {
+    "name": "Danke",
+    "category": "restaurant",
+    "ambiance": [
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "Danke is a sandwich shop and caterer located in the Loop.",
+    "tags": [
+      "food",
+      "lunch",
+      "sandwich"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 45,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "good",
+    "group_friendly": [
+      "solo",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "http://www.dankechicago.com/",
+    "local_score": 6,
+    "why_visit": "A convenient spot in the Loop for a quality sandwich or lunch.",
+    "provider_id": "516f2f698c56e855c059b7c6b13f9af04440f00103f901fab87a8c0100000092030544616e6b65",
+    "address": "Danke, 125 South Clark Street, Chicago, IL 60603, United States of America",
+    "longitude": -87.6302825,
+    "latitude": 41.8797073,
+    "source_categories": [
+      "catering",
+      "catering.restaurant",
+      "catering.restaurant.sandwich"
+    ],
+    "source_opening_hours": null
+  },
+  "5154cd075f73e855c059be9c7ef55df04440f00103f901195335d80200000092030a43657265732043616665": {
+    "name": "Ceres Cafe",
+    "category": "restaurant",
+    "ambiance": [
+      "lively",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A classic American restaurant and cafe located in the Loop, known for its hearty fare and drinks.",
+    "tags": [
+      "american",
+      "bar",
+      "food",
+      "loop",
+      "restaurant"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 60,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "good",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.cerescafechicago.com/",
+    "local_score": 7,
+    "why_visit": "Experience a classic Loop dining spot popular with locals and professionals.",
+    "provider_id": "5154cd075f73e855c059be9c7ef55df04440f00103f901195335d80200000092030a43657265732043616665",
+    "address": "Ceres Cafe, 141 West Jackson Boulevard, Chicago, IL 60604, United States of America",
+    "longitude": -87.6320417,
+    "latitude": 41.8778674,
+    "source_categories": [
+      "catering",
+      "catering.restaurant",
+      "catering.restaurant.american"
+    ],
+    "source_opening_hours": null
+  },
+  "511eff603b73e855c05985bcd4be6ff04440f00103f9013c99b51a0300000092031b39307468204d6572696469616e204b69746368656e202620426172": {
+    "name": "90th Meridian Kitchen & Bar",
+    "category": "restaurant",
+    "ambiance": [
+      "lively",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A kitchen and bar located in the Chicago Loop.",
+    "tags": [
+      "bar",
+      "food",
+      "kitchen",
+      "restaurant"
+    ],
+    "price_tier": "$$",
+    "typical_visit_minutes": 90,
+    "best_time_of_day": "evening",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 5,
+    "why_visit": "Conveniently located in the Loop for a meal or drinks.",
+    "provider_id": "511eff603b73e855c05985bcd4be6ff04440f00103f9013c99b51a0300000092031b39307468204d6572696469616e204b69746368656e202620426172",
+    "address": "90th Meridian Kitchen & Bar, 230 South LaSalle Street, Chicago, IL 60606, United States of America",
+    "longitude": -87.6320332,
+    "latitude": 41.8784102,
+    "source_categories": [
+      "catering",
+      "catering.restaurant"
+    ],
+    "source_opening_hours": null
+  },
+  "51ceee7f3628e855c059749e0ce94bf04440f00103f90149890cbe0200000092030f5669766920427562626c6520546561": {
+    "name": "Vivi Bubble Tea",
+    "category": "cafe",
+    "ambiance": [
+      "lively",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A bubble tea cafe located in the Loop, offering a variety of tea and bubble tea options.",
+    "tags": [
+      "bubble tea",
+      "cafe",
+      "coffee",
+      "drinks",
+      "tea"
+    ],
+    "price_tier": "$",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "afternoon",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "friends",
+      "family",
+      "kids"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 5,
+    "why_visit": "Great spot in the Loop to grab a refreshing bubble tea or snack on the go.",
+    "provider_id": "51ceee7f3628e855c059749e0ce94bf04440f00103f90149890cbe0200000092030f5669766920427562626c6520546561",
+    "address": "Vivi Bubble Tea, 1 East Jackson Boulevard, Chicago, IL 60604, United States of America",
+    "longitude": -87.6274544,
+    "latitude": 41.8773166,
+    "source_categories": [
+      "catering",
+      "catering.cafe",
+      "catering.cafe.bubble_tea",
+      "catering.cafe.tea"
+    ],
+    "source_opening_hours": null
+  },
+  "510ff0a4854be855c0595525db0aabf04440f00103f9013729987601000000920311446f6c6c6f7020436f6666656520436f2e": {
+    "name": "Dollop Coffee Co.",
+    "category": "cafe",
+    "ambiance": [
+      "local",
+      "cozy"
+    ],
+    "neighborhood": "Loop",
+    "description": "A popular local coffee shop in the Loop offering artisanal coffee and beverages.",
+    "tags": [
+      "cafe",
+      "coffee",
+      "local"
+    ],
+    "price_tier": "$",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "morning",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "friends",
+      "couple",
+      "business"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://dollop.coffee/",
+    "local_score": 7,
+    "why_visit": "Enjoy a great cup of locally roasted coffee in the heart of the Loop.",
+    "provider_id": "510ff0a4854be855c0595525db0aabf04440f00103f9013729987601000000920311446f6c6c6f7020436f6666656520436f2e",
+    "address": "Dollop Coffee Co., 55 West Marble Place, Chicago, IL 60606, United States of America",
+    "longitude": -87.6296095,
+    "latitude": 41.8802198,
+    "source_categories": [
+      "catering",
+      "catering.cafe"
+    ],
+    "source_opening_hours": null
+  },
+  "51f81532b71be855c0597184393073f04440f00102f901c23675460000000092030f4845524f20436f6666656520426172": {
+    "name": "HERO Coffee Bar",
+    "category": "cafe",
+    "ambiance": [
+      "cozy",
+      "local"
+    ],
+    "neighborhood": "Loop",
+    "description": "A charming neighborhood coffee bar located in the Loop.",
+    "tags": [
+      "cafe",
+      "coffee"
+    ],
+    "price_tier": "$",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "morning",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": "https://www.herocoffeebars.com/",
+    "local_score": 7,
+    "why_visit": "Grab a quick, quality cup of coffee in a cozy setting while exploring the Loop.",
+    "provider_id": "51f81532b71be855c0597184393073f04440f00102f901c23675460000000092030f4845524f20436f6666656520426172",
+    "address": "HERO Coffee Bar, 22 East Jackson Boulevard, Chicago, IL 60604, United States of America",
+    "longitude": -87.62669162646478,
+    "latitude": 41.878515270313876,
+    "source_categories": [
+      "building",
+      "building.catering",
+      "building.commercial",
+      "catering",
+      "catering.cafe"
+    ],
+    "source_opening_hours": null
+  },
+  "510841a2644de855c05996314ff8b6f04440f00103f9011a5335d802000000920311446f6c6c6f7020436f6666656520436f2e": {
+    "name": "Dollop Coffee Co.",
+    "category": "cafe",
+    "ambiance": [
+      "local",
+      "cozy"
+    ],
+    "neighborhood": "Loop",
+    "description": "A popular Chicago-based coffee shop located in the Loop.",
+    "tags": [
+      "cafe",
+      "coffee",
+      "local"
+    ],
+    "price_tier": "$",
+    "typical_visit_minutes": 30,
+    "best_time_of_day": "morning",
+    "indoor_outdoor": "indoor",
+    "weather_suitability": [
+      "any"
+    ],
+    "walking_required": "minimal",
+    "transit_access": "excellent",
+    "group_friendly": [
+      "solo",
+      "couple",
+      "friends"
+    ],
+    "opening_hours": {},
+    "reservation_required": false,
+    "website": null,
+    "local_score": 7,
+    "why_visit": "Great local spot to grab a quality cup of coffee in the Loop.",
+    "provider_id": "510841a2644de855c05996314ff8b6f04440f00103f9011a5335d802000000920311446f6c6c6f7020436f6666656520436f2e",
+    "address": "Dollop Coffee Co., 55 West Monroe Street, Chicago, IL 60603, United States of America",
+    "longitude": -87.6297237,
+    "latitude": 41.8805838,
+    "source_categories": [
+      "catering",
+      "catering.cafe",
+      "catering.cafe.coffee",
+      "catering.cafe.coffee_shop"
+    ],
+    "source_opening_hours": null
   }
 }

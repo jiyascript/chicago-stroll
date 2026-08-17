@@ -165,6 +165,10 @@ def evaluate_place(
         dietary_preferences
         & place_tags
     )
+    matched_tags = sorted(
+        set(matched_tags)
+        | dietary_matches
+    )
 
     if (
         place.category in FOOD_CATEGORIES

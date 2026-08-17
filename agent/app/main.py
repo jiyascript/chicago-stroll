@@ -126,22 +126,19 @@ def main() -> None:
 
     print("\n===== FOOD OPTIONS =====")
 
-    if not food_options:
-        print("No food candidates retrieved.")
-    else:
-        for candidate in food_options[:5]:
-            print(
-                f"- {candidate.place.name}: "
-                f"{candidate.score:.1f}"
-            )
-
-            if candidate.matched_tags:
-                print(
-                    "  Matches:",
-                    ", ".join(
-                        candidate.matched_tags
-                    ),
-                )
+    for candidate in food_options[:5]:
+        print(
+            f"- {candidate.place.name}: "
+            f"{candidate.score:.1f}"
+        )
+        print(
+            "  Tags:",
+            candidate.place.tags,
+        )
+        print(
+            "  Matched:",
+            candidate.matched_tags,
+        )
 
     print("\n===== DRAFT ITINERARY =====")
 

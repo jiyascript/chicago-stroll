@@ -226,17 +226,20 @@ Follow these rules:
 
 21. Never invent a restaurant, cafe, attraction, landmark, or provider_id.
 
-22. If dietary preferences are specified and a compatible restaurant or cafe
-    exists in the candidate list, include one of those candidates.
+22. If dietary preferences are specified and one or more candidate restaurants
+    or cafes explicitly contain matching dietary tags, you should strongly
+    prefer one of those candidates.
 
-23. Do not treat a generic cafe or restaurant as satisfying a dietary
-    preference unless its metadata explicitly supports that preference.
+23. If no candidate restaurant or cafe explicitly matches the requested
+    dietary preference, do not invent or assume compatibility.
 
-24. Prefer food venues whose tags directly match the user's dietary
-    preferences.
+24. A restaurant without matching dietary tags may still be included for other
+    reasons, but its reason must not claim that it satisfies the user's
+    dietary preference.
 
-25. Do not describe a food venue as dietary-compatible unless that preference
-    is explicitly supported by its candidate tags.
+25. Never infer dietary compatibility from cuisine alone.
+    For example, an Indian, Mediterranean, or Mexican restaurant is NOT
+    necessarily vegetarian unless the candidate tags explicitly say so.
 
 Return a DraftItinerary matching the required structured output schema.
 """.strip()

@@ -3,6 +3,18 @@
 from app.schemas import RepairContext
 
 
+def format_list(
+    values: list[str] | None,
+) -> str:
+    """Format values for the repair prompt."""
+
+    return (
+        ", ".join(values)
+        if values
+        else "None"
+    )
+
+
 def build_repair_prompt(
     context: RepairContext,
 ) -> str:
@@ -30,6 +42,40 @@ def build_repair_prompt(
         else "- None"
     )
 
+    candidate_sections: list[str] = []
+
+    for index, candidate in enumerate(
+        context.candidate_places,
+        start=1,
+    ):
+        place = candidate.place
+
+        candidate_sections.append(
+            f"""
+Candidate {index}
+
+Provider ID: {place.provider_id}
+Name: {place.name}
+Category: {place.category}
+Neighborhood: {place.neighborhood}
+Tags: {format_list(place.tags)}
+Typical visit duration: {place.typical_visit_minutes} minutes
+Walking required: {place.walking_required}
+Transit access: {place.transit_access}
+Opening hours: {place.source_opening_hours or "Unknown"}
+Retrieval score: {candidate.score}
+Matched tags: {format_list(candidate.matched_tags)}
+""".strip()
+        )
+
+    candidates_section = (
+        "\n\n".join(
+            candidate_sections
+        )
+        if candidate_sections
+        else "No retrieved candidates available."
+    )
+
     return f"""
 You are the itinerary repair component for Chicago Stroll.
 
@@ -38,8 +84,8 @@ validation feedback.
 
 Do NOT redesign the entire itinerary unless necessary.
 
-Make the smallest reasonable set of changes needed to resolve the reported
-issues while preserving valid parts of the existing itinerary.
+Make the smallest reasonable changes needed to resolve the reported issues
+while preserving valid parts of the existing itinerary.
 
 TRIP REQUEST
 ------------
@@ -65,6 +111,12 @@ WARNINGS
 {warnings}
 
 
+RETRIEVED CANDIDATE PLACES
+--------------------------
+
+{candidates_section}
+
+
 OUTPUT CONTRACT
 ---------------
 
@@ -75,6 +127,9 @@ Each itinerary stop must contain ONLY:
 - departure_time
 - reason
 
+Every provider_id must exactly match one of the retrieved candidate provider
+IDs listed above.
+
 Do NOT return full Place objects.
 
 Do NOT invent provider IDs.
@@ -83,7 +138,7 @@ Do NOT modify or recreate authoritative place metadata.
 
 You may change only:
 
-- which existing provider_id is selected
+- which retrieved provider_id is selected
 - stop order
 - arrival_time
 - departure_time
@@ -120,32 +175,35 @@ REPAIR REQUIREMENTS
 
 5. Never invent a venue or provider_id.
 
-6. Respect the user's requested start and end times.
+6. Use only provider IDs from RETRIEVED CANDIDATE PLACES.
 
-7. Respect walking tolerance, neighborhood exclusions, dietary preferences,
+7. Respect the user's requested start and end times.
+
+8. Respect walking tolerance, neighborhood exclusions, dietary preferences,
    and other explicit constraints.
 
-8. Avoid duplicate provider IDs.
+9. Avoid duplicate provider IDs.
 
-9. Keep stop timing realistic and chronological.
+10. Keep stop timing realistic and chronological.
 
-10. Do not extend a stop far beyond its normal visit duration merely to fill
+11. Base stop durations on each candidate's typical visit duration.
+
+12. Do not extend a stop far beyond its typical visit duration merely to fill
     the requested time window.
 
-11. If the itinerary cannot reasonably fill the entire requested window using
+13. If the itinerary cannot reasonably fill the entire requested window using
     valid candidates, leave reasonable unused time rather than manipulating
-    candidate metadata or stop duration.
+    stop duration or metadata.
 
-12. Preserve geographic coherence where possible.
+14. Preserve geographic coherence where possible.
 
-13. If a dietary-compatible food stop is needed, use only an existing
-    retrieved provider_id whose metadata supports that dietary preference.
+15. If a dietary-compatible food stop is needed, use only a retrieved
+    restaurant or cafe whose tags explicitly support that dietary preference.
 
-14. Do not claim a generic food venue satisfies a dietary preference unless
+16. Do not claim a generic food venue satisfies a dietary preference unless
     its authoritative tags support that claim.
 
-15. Return a complete repaired DraftItinerary, not a patch, explanation, or
-    commentary.
+17. Return a complete repaired DraftItinerary, not a patch or explanation.
 
 Return only data matching the DraftItinerary structured output schema.
 """.strip()
