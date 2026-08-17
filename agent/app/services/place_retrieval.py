@@ -247,74 +247,83 @@ def retrieve_places(
         top_k=len(all_places),
     )
 
-    # No special food requirement.
-    if not request.dietary_preferences:
-        return ranked[:top_k]
+    if request.dietary_preferences:
+        dietary = normalize_values(
+            request.dietary_preferences
+        )
 
-    dietary = normalize_values(
-        request.dietary_preferences
-    )
-
-    compatible_food = [
-        candidate
-        for candidate in ranked
-        if (
-            candidate.place.category
-            in FOOD_CATEGORIES
-            and dietary.intersection(
-                normalize_values(
-                    candidate.place.tags
+        compatible_food = [
+            candidate
+            for candidate in ranked
+            if (
+                candidate.place.category
+                in FOOD_CATEGORIES
+                and dietary.intersection(
+                    normalize_values(
+                        candidate.place.tags
+                    )
                 )
             )
-        )
-    ]
-
-    other_food = [
-        candidate
-        for candidate in ranked
-        if (
-            candidate.place.category
-            in FOOD_CATEGORIES
-            and candidate
-            not in compatible_food
-        )
-    ]
-
-    food_candidates = (
-        compatible_food
-        + other_food
-    )
-
-    non_food_candidates = [
-        candidate
-        for candidate in ranked
-        if candidate.place.category
-        not in FOOD_CATEGORIES
-    ]
-
-    # Reserve part of retrieval context for food.
-    food_limit = min(
-        5,
-        len(food_candidates),
-    )
-
-    attraction_limit = max(
-        0,
-        top_k - food_limit,
-    )
-
-    selected = (
-        non_food_candidates[
-            :attraction_limit
         ]
-        + food_candidates[
-            :food_limit
-        ]
-    )
 
-    selected.sort(
-        key=lambda candidate: candidate.score,
-        reverse=True,
-    )
+        other_food = [
+            candidate
+            for candidate in ranked
+            if (
+                candidate.place.category
+                in FOOD_CATEGORIES
+                and candidate
+                not in compatible_food
+            )
+        ]
+
+        food_candidates = (
+            compatible_food
+            + other_food
+        )
+
+        non_food_candidates = [
+            candidate
+            for candidate in ranked
+            if candidate.place.category
+            not in FOOD_CATEGORIES
+        ]
+
+        food_limit = min(
+            5,
+            len(food_candidates),
+        )
+
+        attraction_limit = max(
+            0,
+            top_k - food_limit,
+        )
+
+        selected = (
+            non_food_candidates[
+                :attraction_limit
+            ]
+            + food_candidates[
+                :food_limit
+            ]
+        )
+
+        selected.sort(
+            key=lambda candidate: candidate.score,
+            reverse=True,
+        )
+
+    else:
+        selected = ranked[:top_k]
+
+    # Assign short stable IDs only after
+    # the final candidate set has been selected.
+    for index, candidate in enumerate(
+        selected,
+        start=1,
+    ):
+        candidate.candidate_id = (
+            f"C{index}"
+        )
 
     return selected

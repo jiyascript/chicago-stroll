@@ -1,12 +1,9 @@
-"""Schema representing one stop in an itinerary."""
-
+"""Schema representing one scheduled itinerary stop."""
 from pydantic import BaseModel
-from app.schemas.places import Place
-
 
 class ItineraryStop(BaseModel):
-    """One stop in a generated itinerary."""
-    provider_id: str
+    """One scheduled stop in an itinerary."""
+    candidate_id: str
     arrival_time: str
     departure_time: str
     reason: str

@@ -30,9 +30,7 @@ def make_place(
         description="Test place.",
         tags=tags or [],
         price_tier="free",
-        typical_visit_minutes=(
-            typical_visit_minutes
-        ),
+        typical_visit_minutes=typical_visit_minutes,
         best_time_of_day="any",
         indoor_outdoor="indoor",
         weather_suitability=["any"],
@@ -54,10 +52,12 @@ def make_place(
 
 def retrieved(
     place: Place,
+    candidate_id: str,
 ) -> RetrievedPlace:
     """Wrap a place as a retrieved candidate."""
 
     return RetrievedPlace(
+        candidate_id=candidate_id,
         place=place,
         score=10.0,
         matched_tags=[],
@@ -87,12 +87,22 @@ def test_critic_flags_missing_food_stop() -> None:
         tags=["vegetarian"],
     )
 
+    museum_candidate = retrieved(
+        museum,
+        "C1",
+    )
+
+    restaurant_candidate = retrieved(
+        restaurant,
+        "C2",
+    )
+
     itinerary = DraftItinerary(
         title="Test Day",
         summary="Test itinerary.",
         stops=[
             ItineraryStop(
-                provider_id=museum.provider_id,
+                candidate_id="C1",
                 arrival_time="11:00",
                 departure_time="12:00",
                 reason="Test.",
@@ -104,8 +114,8 @@ def test_critic_flags_missing_food_stop() -> None:
         request=request,
         itinerary=itinerary,
         candidates=[
-            retrieved(museum),
-            retrieved(restaurant),
+            museum_candidate,
+            restaurant_candidate,
         ],
     )
 
@@ -130,12 +140,17 @@ def test_critic_uses_canonical_visit_duration() -> None:
         typical_visit_minutes=60,
     )
 
+    museum_candidate = retrieved(
+        museum,
+        "C1",
+    )
+
     itinerary = DraftItinerary(
         title="Bad Duration",
         summary="Test.",
         stops=[
             ItineraryStop(
-                provider_id=museum.provider_id,
+                candidate_id="C1",
                 arrival_time="11:00",
                 departure_time="16:00",
                 reason="Test.",
@@ -147,7 +162,7 @@ def test_critic_uses_canonical_visit_duration() -> None:
         request=request,
         itinerary=itinerary,
         candidates=[
-            retrieved(museum)
+            museum_candidate
         ],
     )
 
@@ -159,7 +174,7 @@ def test_critic_uses_canonical_visit_duration() -> None:
     )
 
 
-def test_critic_rejects_unknown_provider_id() -> None:
+def test_critic_rejects_unknown_candidate_id() -> None:
     request = TripRequest(
         start_time="11:00",
         end_time="12:00",
@@ -170,12 +185,17 @@ def test_critic_rejects_unknown_provider_id() -> None:
         "Museum A"
     )
 
+    museum_candidate = retrieved(
+        museum,
+        "C1",
+    )
+
     itinerary = DraftItinerary(
         title="Invented Place",
         summary="Test.",
         stops=[
             ItineraryStop(
-                provider_id="fake-provider-id",
+                candidate_id="C999",
                 arrival_time="11:00",
                 departure_time="12:00",
                 reason="Test.",
@@ -187,13 +207,80 @@ def test_critic_rejects_unknown_provider_id() -> None:
         request=request,
         itinerary=itinerary,
         candidates=[
-            retrieved(museum)
+            museum_candidate
         ],
     )
 
     assert result.is_valid is False
 
     assert any(
-        "unknown provider_id" in issue
+        "candidate_id" in issue.lower()
+        for issue in result.issues
+    )
+
+
+def test_critic_flags_insufficient_travel_time() -> None:
+    request = TripRequest(
+        start_time="11:00",
+        end_time="14:00",
+        start_location="Loop",
+    )
+
+    place_a = make_place(
+        "Place A",
+    )
+
+    place_b = make_place(
+        "Place B",
+    )
+
+    place_a.latitude = 41.8781
+    place_a.longitude = -87.6298
+
+    place_b.latitude = 41.9000
+    place_b.longitude = -87.6298
+
+    candidate_a = retrieved(
+        place_a,
+        "C1",
+    )
+
+    candidate_b = retrieved(
+        place_b,
+        "C2",
+    )
+
+    itinerary = DraftItinerary(
+        title="Impossible Travel",
+        summary="Test.",
+        stops=[
+            ItineraryStop(
+                candidate_id="C1",
+                arrival_time="11:00",
+                departure_time="12:00",
+                reason="Test.",
+            ),
+            ItineraryStop(
+                candidate_id="C2",
+                arrival_time="12:05",
+                departure_time="13:00",
+                reason="Test.",
+            ),
+        ],
+    )
+
+    result = critique_itinerary(
+        request=request,
+        itinerary=itinerary,
+        candidates=[
+            candidate_a,
+            candidate_b,
+        ],
+    )
+
+    assert result.is_valid is False
+
+    assert any(
+        "travel time" in issue.lower()
         for issue in result.issues
     )

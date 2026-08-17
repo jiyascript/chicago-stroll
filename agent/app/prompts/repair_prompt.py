@@ -52,9 +52,7 @@ def build_repair_prompt(
 
         candidate_sections.append(
             f"""
-Candidate {index}
-
-Provider ID: {place.provider_id}
+Candidate ID: {candidate.candidate_id}
 Name: {place.name}
 Category: {place.category}
 Neighborhood: {place.neighborhood}
@@ -122,12 +120,12 @@ OUTPUT CONTRACT
 
 Each itinerary stop must contain ONLY:
 
-- provider_id
+- candidate_id
 - arrival_time
 - departure_time
 - reason
 
-Every provider_id must exactly match one of the retrieved candidate provider
+Every candidate_id must exactly match one of the retrieved candidate provider
 IDs listed above.
 
 Do NOT return full Place objects.
@@ -138,7 +136,7 @@ Do NOT modify or recreate authoritative place metadata.
 
 You may change only:
 
-- which retrieved provider_id is selected
+- which retrieved candidate_id is selected
 - stop order
 - arrival_time
 - departure_time
@@ -173,7 +171,7 @@ REPAIR REQUIREMENTS
 
 4. Never invent factual information.
 
-5. Never invent a venue or provider_id.
+5. Never invent a venue or candidate_id.
 
 6. Use only provider IDs from RETRIEVED CANDIDATE PLACES.
 
@@ -204,6 +202,13 @@ REPAIR REQUIREMENTS
     its authoritative tags support that claim.
 
 17. Return a complete repaired DraftItinerary, not a patch or explanation.
+
+18. When the critic reports insufficient travel time between two stops,
+    preserve the places when reasonable and adjust timing or ordering so that
+    the gap between them is large enough for travel.
+
+19. Do not solve travel-time violations by changing provider metadata or
+    inventing shorter travel times.
 
 Return only data matching the DraftItinerary structured output schema.
 """.strip()

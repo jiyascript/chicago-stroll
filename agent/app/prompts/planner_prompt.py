@@ -71,9 +71,7 @@ def build_planner_prompt(
 
         candidate_sections.append(
             f"""
-Candidate {index}
-
-Provider ID: {place.provider_id}
+Candidate ID: {candidate.candidate_id}
 Name: {place.name}
 Category: {place.category}
 Neighborhood: {place.neighborhood}
@@ -136,12 +134,12 @@ OUTPUT CONTRACT
 
 Each itinerary stop must contain ONLY:
 
-- provider_id
+- candidate_id
 - arrival_time
 - departure_time
 - reason
 
-The provider_id must exactly match one of the provider IDs in the candidate
+The candidate_id must exactly match one of the provider IDs in the candidate
 list above.
 
 Do NOT return full place objects.
@@ -160,7 +158,7 @@ Do NOT reproduce, rewrite, infer, or modify candidate metadata such as:
 - transit access
 - dietary metadata
 
-The application will resolve provider_id back to the authoritative Place
+The application will resolve candidate_id back to the authoritative Place
 record after generation.
 
 
@@ -185,7 +183,7 @@ Follow these rules:
 
 6. Include anything under must_include whenever a matching candidate exists.
 
-7. Use each provider_id at most once.
+7. Use each candidate_id at most once.
 
 8. Use each candidate's typical_visit_minutes as the primary estimate for stop
    duration.
@@ -224,7 +222,7 @@ Follow these rules:
 
 20. Arrival and departure times must use 24-hour HH:MM format.
 
-21. Never invent a restaurant, cafe, attraction, landmark, or provider_id.
+21. Never invent a restaurant, cafe, attraction, landmark, or candidate_id.
 
 22. If dietary preferences are specified and one or more candidate restaurants
     or cafes explicitly contain matching dietary tags, you should strongly
@@ -240,6 +238,13 @@ Follow these rules:
 25. Never infer dietary compatibility from cuisine alone.
     For example, an Indian, Mediterranean, or Mexican restaurant is NOT
     necessarily vegetarian unless the candidate tags explicitly say so.
+
+26. Leave realistic travel time between consecutive stops. Nearby Loop stops
+    generally need at least 10–20 minutes of transition time, while farther
+    locations may require substantially more.
+
+27. Do not schedule the next stop immediately after the previous stop unless
+    the places are effectively colocated.
 
 Return a DraftItinerary matching the required structured output schema.
 """.strip()

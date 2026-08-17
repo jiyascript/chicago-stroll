@@ -8,6 +8,9 @@ from app.schemas import (
     RetrievedPlace,
     TripRequest,
 )
+from app.services.travel_service import (
+    estimate_travel_minutes,
+)
 
 
 TIME_FORMAT = "%H:%M"
@@ -45,7 +48,7 @@ def critique_itinerary(
     itinerary: DraftItinerary,
     candidates: list[RetrievedPlace],
 ) -> CritiqueResult:
-    """Validate an itinerary against request and canonical candidate data."""
+    """Validate an itinerary against canonical retrieved candidates."""
 
     issues: list[str] = []
     warnings: list[str] = []
@@ -59,50 +62,44 @@ def critique_itinerary(
             warnings=[],
         )
 
-    # Canonical place data lives here.
+    # candidate_id -> canonical Place
     candidate_lookup = {
-        candidate.place.provider_id: candidate.place
+        candidate.candidate_id: candidate.place
         for candidate in candidates
+        if candidate.candidate_id is not None
     }
 
-    # 1. Every itinerary stop must reference a retrieved provider ID.
-    unknown_provider_ids = [
-        stop.provider_id
-        for stop in itinerary.stops
-        if stop.provider_id
-        not in candidate_lookup
-    ]
-
-    for provider_id in unknown_provider_ids:
-        issues.append(
-            (
-                "The itinerary references an unknown "
-                f"provider_id: {provider_id}."
+    # 1. Candidate IDs must come from retrieval.
+    for stop in itinerary.stops:
+        if stop.candidate_id not in candidate_lookup:
+            issues.append(
+                (
+                    "The itinerary references an unknown "
+                    f"candidate_id: {stop.candidate_id}."
+                )
             )
-        )
 
-    # Keep later rules from crashing on invalid IDs.
+    # Only use resolvable stops for checks that need Place data.
     valid_stops = [
         stop
         for stop in itinerary.stops
-        if stop.provider_id
-        in candidate_lookup
+        if stop.candidate_id in candidate_lookup
     ]
 
     # 2. Duplicate places.
-    provider_ids = [
-        stop.provider_id
+    candidate_ids = [
+        stop.candidate_id
         for stop in itinerary.stops
     ]
 
-    if len(provider_ids) != len(
-        set(provider_ids)
+    if len(candidate_ids) != len(
+        set(candidate_ids)
     ):
         issues.append(
             "The itinerary contains duplicate places."
         )
 
-    # 3. Trip start time.
+    # 3. Requested start time.
     if request.start_time:
         requested_start = parse_time(
             request.start_time
@@ -120,7 +117,7 @@ def critique_itinerary(
                 )
             )
 
-    # 4. Trip end time.
+    # 4. Requested end time.
     if request.end_time:
         requested_end = parse_time(
             request.end_time
@@ -148,10 +145,13 @@ def critique_itinerary(
 
         if unused_minutes >= 180:
             warnings.append(
-                "The itinerary leaves a large amount of unused time before the latest end time."
+                (
+                    "The itinerary leaves a large amount "
+                    "of unused time before the latest end time."
+                )
             )
 
-    # 5. Chronological ordering / overlaps.
+    # 5. Chronological ordering.
     for previous, current in zip(
         itinerary.stops,
         itinerary.stops[1:],
@@ -166,23 +166,23 @@ def critique_itinerary(
 
         if current_arrival < previous_departure:
             previous_place = candidate_lookup.get(
-                previous.provider_id
+                previous.candidate_id
             )
 
             current_place = candidate_lookup.get(
-                current.provider_id
+                current.candidate_id
             )
 
             previous_name = (
                 previous_place.name
                 if previous_place
-                else previous.provider_id
+                else previous.candidate_id
             )
 
             current_name = (
                 current_place.name
                 if current_place
-                else current.provider_id
+                else current.candidate_id
             )
 
             issues.append(
@@ -192,7 +192,60 @@ def critique_itinerary(
                 )
             )
 
-    # 6. Walking tolerance.
+    # 6. Travel feasibility.
+    for current, next_stop in zip(
+        itinerary.stops,
+        itinerary.stops[1:],
+    ):
+        current_place = candidate_lookup.get(
+            current.candidate_id
+        )
+
+        next_place = candidate_lookup.get(
+            next_stop.candidate_id
+        )
+
+        if (
+            current_place is None
+            or next_place is None
+        ):
+            continue
+
+        departure = parse_time(
+            current.departure_time
+        )
+
+        next_arrival = parse_time(
+            next_stop.arrival_time
+        )
+
+        available_minutes = int(
+            (
+                next_arrival
+                - departure
+            ).total_seconds()
+            / 60
+        )
+
+        required_minutes = (
+            estimate_travel_minutes(
+                current_place,
+                next_place,
+            )
+        )
+
+        if available_minutes < required_minutes:
+            issues.append(
+                (
+                    "Insufficient travel time between "
+                    f"{current_place.name} and "
+                    f"{next_place.name}: "
+                    f"{available_minutes} minutes available, "
+                    f"approximately {required_minutes} required."
+                )
+            )
+
+    # 7. Walking tolerance.
     if request.walking_tolerance in {
         "minimal",
         "limited",
@@ -201,7 +254,7 @@ def critique_itinerary(
 
         for stop in valid_stops:
             place = candidate_lookup[
-                stop.provider_id
+                stop.candidate_id
             ]
 
             if place.walking_required == "high":
@@ -218,36 +271,35 @@ def critique_itinerary(
                 )
             )
 
-    # 7. Excluded neighborhoods.
+    # 8. Excluded neighborhoods.
     excluded = normalize_values(
         request.excluded_neighborhoods
     )
 
-    if excluded:
-        for stop in valid_stops:
-            place = candidate_lookup[
-                stop.provider_id
-            ]
+    for stop in valid_stops:
+        place = candidate_lookup[
+            stop.candidate_id
+        ]
 
-            if (
-                place.neighborhood.lower()
-                in excluded
-            ):
-                issues.append(
-                    (
-                        f"{place.name} is in excluded "
-                        f"neighborhood {place.neighborhood}."
-                    )
+        if (
+            place.neighborhood.lower()
+            in excluded
+        ):
+            issues.append(
+                (
+                    f"{place.name} is in excluded "
+                    f"neighborhood {place.neighborhood}."
                 )
+            )
 
-    # 8. Dietary-compatible food.
+    # 9. Dietary compatibility.
     if request.dietary_preferences:
         dietary = normalize_values(
             request.dietary_preferences
         )
 
         compatible_food_candidates = [
-            candidate.place
+            candidate
             for candidate in candidates
             if (
                 candidate.place.category
@@ -260,27 +312,23 @@ def critique_itinerary(
             )
         ]
 
-        # Only require the planner to use compatible food
-        # if retrieval actually found compatible food.
         if compatible_food_candidates:
-            compatible_food_stop = False
-
-            for stop in valid_stops:
-                place = candidate_lookup[
-                    stop.provider_id
-                ]
-
-                if (
-                    place.category
+            compatible_food_stop = any(
+                (
+                    candidate_lookup[
+                        stop.candidate_id
+                    ].category
                     in FOOD_CATEGORIES
-                    and dietary.intersection(
-                        normalize_values(
-                            place.tags
-                        )
+                )
+                and dietary.intersection(
+                    normalize_values(
+                        candidate_lookup[
+                            stop.candidate_id
+                        ].tags
                     )
-                ):
-                    compatible_food_stop = True
-                    break
+                )
+                for stop in valid_stops
+            )
 
             if not compatible_food_stop:
                 issues.append(
@@ -290,19 +338,19 @@ def critique_itinerary(
                         "does not include one."
                     )
                 )
+
         else:
             warnings.append(
-                "No retrieved food candidate has verified "
-                "metadata matching the user's dietary preferences."
+                (
+                    "No retrieved food candidate has verified "
+                    "metadata matching the user's dietary preferences."
+                )
             )
 
-    # 9. Stop duration sanity.
-    #
-    # Crucially, expected duration comes from canonical
-    # candidate data, never from LLM output.
+    # 10. Canonical visit-duration validation.
     for stop in valid_stops:
         place = candidate_lookup[
-            stop.provider_id
+            stop.candidate_id
         ]
 
         arrival = parse_time(
@@ -343,10 +391,7 @@ def critique_itinerary(
             expected_minutes // 2,
         )
 
-        if (
-            actual_minutes
-            > max_reasonable_minutes
-        ):
+        if actual_minutes > max_reasonable_minutes:
             issues.append(
                 (
                     f"{place.name} is scheduled for "
@@ -356,10 +401,7 @@ def critique_itinerary(
                 )
             )
 
-        elif (
-            actual_minutes
-            < min_reasonable_minutes
-        ):
+        elif actual_minutes < min_reasonable_minutes:
             warnings.append(
                 (
                     f"{place.name} is scheduled for only "

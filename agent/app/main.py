@@ -6,7 +6,8 @@ from app.schemas import (
     RetrievedPlace,
     TripRequest,
 )
-
+from app.services.itinerary_hydration import hydrate_itinerary
+from app.services.travel_service import estimate_travel_minutes
 
 FOOD_CATEGORIES = {
     "restaurant",
@@ -126,37 +127,102 @@ def main() -> None:
 
     print("\n===== FOOD OPTIONS =====")
 
-    for candidate in food_options[:5]:
+    if not food_options:
         print(
-            f"- {candidate.place.name}: "
-            f"{candidate.score:.1f}"
+            "No food candidates retrieved."
         )
-        print(
-            "  Tags:",
-            candidate.place.tags,
-        )
-        print(
-            "  Matched:",
-            candidate.matched_tags,
-        )
+    else:
+        for candidate in food_options[:5]:
+            print(
+                f"- {candidate.place.name}: "
+                f"{candidate.score:.1f}"
+            )
 
-    print("\n===== DRAFT ITINERARY =====")
+            print(
+                "  Tags:",
+                candidate.place.tags,
+            )
+
+            print(
+                "  Matched:",
+                candidate.matched_tags,
+            )
 
     draft_data = second_result.get(
         "draft_itinerary"
     )
 
+    print("\n===== FINAL ITINERARY =====")
+
     if draft_data is None:
-        print("No itinerary generated.")
+        print(
+            "No itinerary generated."
+        )
     else:
         draft = DraftItinerary.model_validate(
             draft_data
         )
 
+        resolved = hydrate_itinerary(
+            itinerary=draft,
+            candidates=retrieved_places,
+        )
+
         print(
-            draft.model_dump_json(
-                indent=2
+            f"\n{resolved.title}"
+        )
+
+        print(
+            resolved.summary
+        )
+
+        for stop in resolved.stops:
+            print(
+                (
+                    f"\n{stop.arrival_time}"
+                    f" - "
+                    f"{stop.departure_time}"
+                )
             )
+
+            print(
+                stop.place.name
+            )
+
+            print(
+                f"Category: "
+                f"{stop.place.category}"
+            )
+
+            print(
+                f"Neighborhood: "
+                f"{stop.place.neighborhood}"
+            )
+
+            print(
+                f"Typical visit: "
+                f"{stop.place.typical_visit_minutes} min"
+            )
+
+            print(
+                f"Reason: "
+                f"{stop.reason}"
+            )
+    print("\n===== TRAVEL ESTIMATES =====")
+
+    for current, next_stop in zip(
+        resolved.stops,
+        resolved.stops[1:],
+    ):
+        minutes = estimate_travel_minutes(
+            current.place,
+            next_stop.place,
+        )
+
+        print(
+            f"- {current.place.name} "
+            f"→ {next_stop.place.name}: "
+            f"~{minutes} min"
         )
 
     print("\n===== CRITIQUE =====")
@@ -166,9 +232,13 @@ def main() -> None:
     )
 
     if critique is None:
-        print("No critique generated.")
+        print(
+            "No critique generated."
+        )
     else:
-        print(critique)
+        print(
+            critique
+        )
 
     print(
         "\nRepair count:",
