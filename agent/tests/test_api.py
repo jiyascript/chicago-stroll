@@ -10,7 +10,7 @@ def test_web_app_is_served() -> None:
     assert "Chicago Stroll" in response.text
 
 def test_health_endpoint() -> None:
-    response = client.get("/health")
+    response = client.get("/api/health")
     assert response.status_code == 200
     assert response.json() == {
         "status": "ok"
@@ -38,7 +38,7 @@ def test_plan_endpoint_returns_threadid(monkeypatch)-> None:
     )
 
     response = client.post(
-        "/plan",
+        "/api/plan",
         json={
             "message": (
                 "Plan an architecture day "
@@ -84,7 +84,7 @@ def test_continue_endpoint_uses_existing_thread_id(monkeypatch,) -> None:
     thread_id = "test-thread-123"
 
     response = client.post(
-        "/continue",
+        "/api/continue",
         json={
             "thread_id": thread_id,
             "message": "August 8, 2026",
@@ -127,7 +127,7 @@ def test_plan_response_includes_warnings(
     )
 
     response = client.post(
-        "/plan",
+        "/api/plan",
         json={
             "message": "Plan a day."
         },

@@ -5,7 +5,7 @@ from app.api.models import PlanRequest, PlanResponse, ContinueRequest
 from app.schemas import DraftItinerary, RetrievedPlace
 from app.services.itinerary_hydration import hydrate_itinerary
 
-router = APIRouter()
+router = APIRouter(prefix="/api")
 graph = create_planner_graph()
 
 def build_response(thread_id: str, result:dict,) -> PlanResponse:

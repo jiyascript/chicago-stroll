@@ -160,13 +160,13 @@ function escapeHtml(value) {
 $("#planner-form").addEventListener("submit", (event) => {
   event.preventDefault();
   state.lastPrompt = $("#request").value.trim();
-  if (state.lastPrompt) requestPlan("/plan", { message: state.lastPrompt });
+  if (state.lastPrompt) requestPlan("/api/plan", { message: state.lastPrompt });
 });
 
 $("#clarification-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const message = $("#clarification-answer").value.trim();
-  if (message && state.threadId) requestPlan("/continue", { thread_id: state.threadId, message });
+  if (message && state.threadId) requestPlan("/api/continue", { thread_id: state.threadId, message });
 });
 
 document.querySelectorAll("[data-prompt]").forEach((button) => {
