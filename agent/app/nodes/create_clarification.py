@@ -5,8 +5,8 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from app.config import create_model
 from app.schemas import TripRequest
 from app.state import PlannerState
-
-
+from app.services.model_invocation import invoke_runnable_with_fallback
+from app.config.model import create_model,get_fallback_model_name
 SYSTEM_PROMPT = """
 You are the clarification assistant for Chicago Stroll.
 
@@ -36,7 +36,8 @@ def create_clarification(state: PlannerState) -> dict:
         trip_request_data
     )
 
-    model = create_model()
+    primary_model = create_model()
+    fallback_model = create_model(get_fallback_model_name())
 
     prompt = f"""
 Current trip request:
@@ -47,14 +48,20 @@ Missing fields:
 
 {state.get("missing_fields", [])}
 """
+    messages = [
+        SystemMessage(
+            content=SYSTEM_PROMPT,
+        ),
+        HumanMessage(
+            content=prompt,
+        ),
+    ]
 
-    response = model.invoke(
-        [
-            SystemMessage(content=SYSTEM_PROMPT),
-            HumanMessage(content=prompt),
-        ]
+    response = invoke_runnable_with_fallback(
+        primary=primary_model,
+        fallback=fallback_model,
+        payload=messages,
     )
-
     content = response.content
 
     if isinstance(content, str):

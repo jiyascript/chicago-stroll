@@ -2,9 +2,9 @@
 
 from langchain_core.messages import HumanMessage, SystemMessage
 
-from app.config import create_model
+from app.config.model import create_model, get_fallback_model_name
 from app.schemas import PlaceEnrichment, RawPlace
-
+from app.services.model_invocation import invoke_runnable_with_fallback
 
 SYSTEM_PROMPT = """
 You enrich normalized Chicago place records for Chicago Stroll.
@@ -55,26 +55,26 @@ Rules:
 """
 
 
-def enrich_place(
-    raw_place: RawPlace,
-) -> PlaceEnrichment:
+def enrich_place(raw_place: RawPlace,) -> PlaceEnrichment:
     """Generate planning metadata for one normalized place."""
 
-    model = create_model()
+    primary_model = create_model()
+    fallback_model= create_model(get_fallback_model_name())
+    primary = primary_model.with_structured_output(PlaceEnrichment)
+    fallback=fallback_model.with_structured_output(PlaceEnrichment)
+    messages = [
+        SystemMessage(
+            content=SYSTEM_PROMPT
+        ),
+        HumanMessage(
+            content=raw_place.model_dump_json(
+                indent=2
+            )
+        ),
+    ]
 
-    enrichment_model = model.with_structured_output(
-        PlaceEnrichment
-    )
-
-    return enrichment_model.invoke(
-        [
-            SystemMessage(
-                content=SYSTEM_PROMPT
-            ),
-            HumanMessage(
-                content=raw_place.model_dump_json(
-                    indent=2
-                )
-            ),
-        ]
+    return invoke_runnable_with_fallback(
+        primary=primary,
+        fallback=fallback,
+        payload=messages,
     )
