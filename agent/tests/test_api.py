@@ -3,6 +3,12 @@ from app.api.server import app
 
 client = TestClient(app)
 
+
+def test_web_app_is_served() -> None:
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "Chicago Stroll" in response.text
+
 def test_health_endpoint() -> None:
     response = client.get("/health")
     assert response.status_code == 200

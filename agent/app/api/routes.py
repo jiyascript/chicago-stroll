@@ -15,7 +15,10 @@ def build_response(thread_id: str, result:dict,) -> PlanResponse:
     retrieved_data = result.get("retrieved_places", [],)
     if (draft_data is not None and retrieved_data):
         draft = DraftItinerary.model_validate(draft_data)
-        candidates = [RetrievedPlace.model_validate(candidate for candidate in retrieved_data)]
+        candidates = [
+            RetrievedPlace.model_validate(candidate)
+            for candidate in retrieved_data
+        ]
         resolved = hydrate_itinerary(itinerary=draft, candidates=candidates)
         itinerary = resolved.model_dump(mode="json")
     return PlanResponse(

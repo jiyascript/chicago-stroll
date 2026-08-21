@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Chicago Stroll, thoughtful Chicago days planned around you." />
+    <title>Chicago Stroll</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Chicago Stroll home">
+        <span>Chicago Stroll</span>
+      </a>
+    </header>
+
+    <main>
+      <section class="hero" id="planner">
+        <div class="eyebrow">YOUR DAY, BEAUTIFULLY PACED</div>
+        <h1>Meet the Chicago<br />you’ll <em>remember.</em></h1>
+        <p class="hero-copy">Tell us what makes a day feel like yours. We’ll shape a thoughtful route through the city, one great stop at a time.</p>
+
+        <form class="planner-card" id="planner-form">
+          <label for="request">What kind of day are you imagining?</label>
+          <div class="input-wrap">
+            <textarea id="request" rows="3" placeholder="A relaxed Saturday with good architecture, a cozy lunch, and somewhere by the water…" required></textarea>
+            <button type="submit" id="submit-button" aria-label="Plan my day">
+              <span>Plan my day</span><span class="arrow">↗</span>
+            </button>
+          </div>
+          <div class="suggestions" aria-label="Example ideas">
+            <button type="button" data-prompt="A romantic afternoon with art, cocktails, and a great sunset. Moderate budget and not too much walking.">Date day</button>
+            <button type="button" data-prompt="Show me a local Chicago day with hidden gems, independent shops, and casual food.">Local gems</button>
+            <button type="button" data-prompt="Plan a family-friendly day with indoor options, deep-dish pizza, and easy transit.">Family day</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="loading-state hidden" id="loading-state" aria-live="polite">
+        <div class="loader-map"><i></i><i></i><i></i><span></span></div>
+        <p>Tracing your path through Chicago…</p>
+        <small>Finding the right places and pacing your day</small>
+      </section>
+
+      <section class="clarification hidden" id="clarification" aria-live="polite">
+        <p class="section-kicker">ONE QUICK DETAIL</p>
+        <h2 id="clarification-question"></h2>
+        <form id="clarification-form">
+          <input id="clarification-answer" autocomplete="off" required placeholder="Type your answer…" />
+          <button type="submit">Continue <span>→</span></button>
+        </form>
+      </section>
+
+      <section class="itinerary hidden" id="itinerary" aria-live="polite">
+        <div class="itinerary-heading">
+          <div>
+            <p class="section-kicker">YOUR CHICAGO STROLL</p>
+            <h2 id="itinerary-title"></h2>
+            <p id="itinerary-summary"></p>
+          </div>
+          <button class="start-over" id="start-over">Plan another day ↻</button>
+        </div>
+        <div class="route" id="route"></div>
+      </section>
+
+      <section class="error-state hidden" id="error-state" role="alert">
+        <span>Something went off route.</span>
+        <p id="error-message">We couldn’t build your day just yet. Please try again.</p>
+        <button id="retry-button">Back to planner</button>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-mark">Chicago Stroll</div>
+      <p>Thoughtful days in a city worth wandering.</p>
+    </footer>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
