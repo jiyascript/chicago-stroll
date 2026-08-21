@@ -1,6 +1,5 @@
 """Reliable model invocation with retry and fallback."""
-from unittest.mock import patch
-import pytest
+
 from time import sleep
 from typing import Any
 from google.genai.errors import ClientError,ServerError

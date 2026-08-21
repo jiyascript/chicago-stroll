@@ -1,15 +1,7 @@
 const $ = (selector) => document.querySelector(selector);
 
-const state = { threadId: null, lastPrompt: "" };
+const state = { threadId: null, isLoading: false, lastPrompt: "" };
 const sections = ["#loading", "#clarification", "#itinerary", "#error-state"];
-
-function setLoading(isLoading) {
-  const loading = document.getElementById("loading");
-
-  if (loading) {
-    loading.setAttribute("aria-busy", String(isLoading));
-  }
-}
 
 function show(selector) {
   sections.forEach((item) => $(item).classList.add("hidden"));
@@ -18,20 +10,56 @@ function show(selector) {
     $(selector).scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
+function setLoading(isLoading) {
+  state.isLoading = isLoading;
+
+  document
+    .querySelectorAll("button[type='submit']")
+    .forEach((button) => {
+      button.disabled = isLoading;
+    });
+
+  const loadingState = $("#loading");
+
+  if (loadingState) {
+    loadingState.setAttribute(
+      "aria-busy",
+      String(isLoading)
+    );
+  }
+}
 
 async function requestPlan(endpoint, payload) {
+  if (state.isLoading) {
+    return;
+  }
+
   setLoading(true);
   show("#loading");
+
   try {
     const response = await fetch(endpoint, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(payload),
     });
-    if (!response.ok) throw new Error(`The planner returned ${response.status}.`);
-    handleResponse(await response.json());
+
+    if (!response.ok) {
+      throw new Error(
+        `The planner returned ${response.status}.`
+      );
+    }
+
+    handleResponse(
+      await response.json()
+    );
   } catch (error) {
-    $("#error-message").textContent = error.message || "We couldn’t build your day just yet. Please try again.";
+    $("#error-message").textContent =
+      error.message ||
+      "We couldn’t build your day just yet. Please try again.";
+
     show("#error-state");
   } finally {
     setLoading(false);
@@ -41,7 +69,7 @@ async function requestPlan(endpoint, payload) {
 function handleResponse(data) {
   state.threadId = data.thread_id;
   if (data.itinerary) {
-    renderItinerary(data.itinerary, data.warnings);
+    renderItinerary(data.itinerary, data.warnings || []);
   } else if (data.clarification_question) {
     $("#clarification-question").textContent = data.clarification_question;
     $("#clarification-answer").value = "";
@@ -87,7 +115,7 @@ function renderWarnings(warnings) {
   region.hidden = false;
 }
 
-function renderItinerary(itinerary, warnings = itinerary.warnings) {
+function renderItinerary(itinerary, warnings = []) {
   $("#itinerary-title").textContent = itinerary.title;
   $("#itinerary-summary").textContent = itinerary.summary;
   const route = $("#route");

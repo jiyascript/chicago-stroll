@@ -18,8 +18,8 @@ button:disabled {
   cursor: not-allowed;
 }
 button:focus-visible,
-textarea:focus-visible,
-input:focus-visible {
+input:focus-visible,
+textarea:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
 }
@@ -46,7 +46,6 @@ textarea { width: 100%; resize: none; border: 0; border-bottom: 1px solid var(--
 textarea::placeholder, input::placeholder { color: #778079; }
 .input-wrap button { border: 0; background: var(--green); color: white; padding: 15px 18px; cursor: pointer; display: flex; gap: 28px; align-items: center; transition: transform .2s, background .2s; }
 .input-wrap button:hover { transform: translateY(-2px); background: #183b2a; }
-.input-wrap button:disabled { opacity: .6; cursor: wait; }
 .arrow { color: var(--lime); font-size: 18px; }
 .suggestions { display: flex; gap: 8px; flex-wrap: wrap; padding-top: 18px; }
 .suggestions::before { content: "TRY"; font-size: 9px; letter-spacing: .16em; align-self: center; margin-right: 3px; }
@@ -81,8 +80,10 @@ textarea::placeholder, input::placeholder { color: #778079; }
 .stop-line { display: flex; align-items: center; flex-direction: column; }.stop-dot { width: 13px; height: 13px; border: 3px solid var(--cream); outline: 1px solid var(--orange); background: var(--orange); border-radius: 50%; margin-top: 5px; flex: 0 0 auto; }.stop-line::after { content: ""; width: 1px; flex: 1; background: repeating-linear-gradient(to bottom, var(--line) 0 5px, transparent 5px 10px); margin: 10px 0; }.stop:last-child .stop-line::after { display: none; }
 .stop-card { padding: 0 0 45px; }.stop-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }.pill { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; padding: 5px 8px; border: 1px solid var(--line); border-radius: 20px; }.pill.accent { background: var(--lime); border-color: var(--lime); }
 .stop-card h3 { font: 38px/1 "Newsreader", serif; margin: 0 0 10px; }.stop-card .description { color: #59645d; line-height: 1.55; margin: 0 0 15px; }.reason { border-left: 2px solid var(--orange); padding-left: 14px; font: italic 17px/1.4 "Newsreader", serif; }.stop-details { display: flex; gap: 22px; font-size: 11px; margin-top: 18px; }.stop-details a { color: var(--green); text-underline-offset: 3px; }
+.warnings {
+  margin-bottom: 1.5rem;
+}
 .warning-card {
-  margin-top: 1.5rem;
   padding: 1rem 1.25rem;
   border: 1px solid rgba(120, 90, 50, 0.25);
   border-radius: 1rem;
@@ -90,11 +91,14 @@ textarea::placeholder, input::placeholder { color: #778079; }
 }
 .warning-title {
   margin: 0 0 0.5rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 .warning-card ul {
   margin: 0;
-  padding-left: 1.2rem;
+  padding-left: 1.25rem;
+}
+.warning-card li + li {
+  margin-top: 0.4rem;
 }
 .error-state span { font: 42px "Newsreader", serif; }.error-state button { border: 0; background: var(--green); color: white; padding: 13px 20px; cursor: pointer; }
 
