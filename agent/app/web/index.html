@@ -40,7 +40,13 @@
         </form>
       </section>
 
-      <section class="loading-state hidden" id="loading-state" aria-live="polite">
+      <section
+        class="loading-state hidden"
+        id="loading"
+        role="status"
+        aria-live="polite"
+        aria-busy="false"
+      >
         <div class="loader-map"><i></i><i></i><i></i><span></span></div>
         <p>Tracing your path through Chicago…</p>
         <small>Finding the right places and pacing your day</small>
@@ -65,6 +71,12 @@
           <button class="start-over" id="start-over">Plan another day ↻</button>
         </div>
         <div class="route" id="route"></div>
+        <section
+          id="warnings"
+          class="warnings"
+          aria-live="polite"
+          hidden
+        ></section>
       </section>
 
       <section class="error-state hidden" id="error-state" role="alert">

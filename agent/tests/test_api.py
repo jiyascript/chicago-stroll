@@ -98,3 +98,44 @@ def test_continue_endpoint_uses_existing_thread_id(monkeypatch,) -> None:
     assert data["thread_id"] == thread_id
     assert data["clarification_question"] is None
     assert data["ready_for_research"] is True
+def test_plan_response_includes_warnings(
+    monkeypatch,
+) -> None:
+    fake_result = {
+        "clarification_question": None,
+        "ready_for_research": True,
+        "draft_itinerary": None,
+        "retrieved_places": [],
+        "critique_result": {
+            "is_valid": True,
+            "issues": [],
+            "warnings": [
+                "Test warning."
+            ],
+        },
+    }
+
+    def fake_invoke(
+        input_data,
+        config,
+    ):
+        return fake_result
+
+    monkeypatch.setattr(
+        "app.api.routes.graph.invoke",
+        fake_invoke,
+    )
+
+    response = client.post(
+        "/plan",
+        json={
+            "message": "Plan a day."
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json()[
+        "warnings"
+    ] == [
+        "Test warning."
+    ]

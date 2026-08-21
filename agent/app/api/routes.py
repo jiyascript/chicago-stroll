@@ -11,6 +11,7 @@ graph = create_planner_graph()
 def build_response(thread_id: str, result:dict,) -> PlanResponse:
     """Convert LangGraph state into an API response"""
     itinerary = None
+    critique_result = result.get("critique_result") or {}
     draft_data = result.get("draft_itinerary")
     retrieved_data = result.get("retrieved_places", [],)
     if (draft_data is not None and retrieved_data):
@@ -30,6 +31,7 @@ def build_response(thread_id: str, result:dict,) -> PlanResponse:
         ready_for_research=result.get(
             "ready_for_research"
         ),
+        warnings=critique_result.get("warnings", []),
     )
 
 @router.get("/health")

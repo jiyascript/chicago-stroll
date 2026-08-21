@@ -1,7 +1,15 @@
 const $ = (selector) => document.querySelector(selector);
 
 const state = { threadId: null, lastPrompt: "" };
-const sections = ["#loading-state", "#clarification", "#itinerary", "#error-state"];
+const sections = ["#loading", "#clarification", "#itinerary", "#error-state"];
+
+function setLoading(isLoading) {
+  const loading = document.getElementById("loading");
+
+  if (loading) {
+    loading.setAttribute("aria-busy", String(isLoading));
+  }
+}
 
 function show(selector) {
   sections.forEach((item) => $(item).classList.add("hidden"));
@@ -12,7 +20,8 @@ function show(selector) {
 }
 
 async function requestPlan(endpoint, payload) {
-  show("#loading-state");
+  setLoading(true);
+  show("#loading");
   try {
     const response = await fetch(endpoint, {
       method: "POST",
@@ -24,13 +33,15 @@ async function requestPlan(endpoint, payload) {
   } catch (error) {
     $("#error-message").textContent = error.message || "We couldn’t build your day just yet. Please try again.";
     show("#error-state");
+  } finally {
+    setLoading(false);
   }
 }
 
 function handleResponse(data) {
   state.threadId = data.thread_id;
   if (data.itinerary) {
-    renderItinerary(data.itinerary);
+    renderItinerary(data.itinerary, data.warnings);
   } else if (data.clarification_question) {
     $("#clarification-question").textContent = data.clarification_question;
     $("#clarification-answer").value = "";
@@ -49,7 +60,34 @@ function safeUrl(value) {
   } catch { return null; }
 }
 
-function renderItinerary(itinerary) {
+function renderWarnings(warnings) {
+  const region = $("#warnings");
+  region.replaceChildren();
+
+  if (!Array.isArray(warnings) || warnings.length === 0) {
+    region.hidden = true;
+    return;
+  }
+
+  const card = document.createElement("div");
+  card.className = "warning-card";
+  const title = document.createElement("p");
+  title.className = "warning-title";
+  title.textContent = "A few things to keep in mind";
+  const list = document.createElement("ul");
+
+  warnings.forEach((warning) => {
+    const item = document.createElement("li");
+    item.textContent = String(warning);
+    list.appendChild(item);
+  });
+
+  card.append(title, list);
+  region.appendChild(card);
+  region.hidden = false;
+}
+
+function renderItinerary(itinerary, warnings = itinerary.warnings) {
   $("#itinerary-title").textContent = itinerary.title;
   $("#itinerary-summary").textContent = itinerary.summary;
   const route = $("#route");
@@ -81,6 +119,7 @@ function renderItinerary(itinerary) {
       </div>`;
     route.appendChild(article);
   });
+  renderWarnings(warnings);
   show("#itinerary");
 }
 
