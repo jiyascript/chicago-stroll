@@ -1,8 +1,13 @@
+"""Vercel entrypoint for the Chicago Stroll API."""
+
 from fastapi import FastAPI
 
-app = FastAPI()
+from app.api.routes import router
 
 
-@app.get("/api/health")
-def health() -> dict:
-    return {"status": "ok"}
+app = FastAPI(
+    title="Chicago Stroll",
+    version="0.1.0",
+)
+
+app.include_router(router)
