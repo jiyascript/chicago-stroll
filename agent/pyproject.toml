@@ -5,6 +5,7 @@ description = "AI planning backend for Chicago Stroll"
 requires-python = ">=3.12,<3.15"
 
 dependencies = [
+    "fastapi",
     "langchain",
     "langchain-google-genai",
     "langgraph",
@@ -12,6 +13,8 @@ dependencies = [
     "python-dotenv",
     "pydantic",
     "httpx",
+    "google-genai",
+    "requests"
 ]
 
 [project.optional-dependencies]
