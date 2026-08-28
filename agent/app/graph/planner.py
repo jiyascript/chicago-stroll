@@ -9,6 +9,7 @@ from app.graph.router import (
     route_after_tools,
     route_initial_request,
     route_planner_agent,
+    route_after_recovery,
     route_after_force_submit
 )
 from app.nodes import (
@@ -22,6 +23,10 @@ from app.nodes import (
     ready_for_research,
     repair_node,
     update_request,
+    recovery_agent,
+    prepare_replan,
+    ask_user_from_recovery,
+    mark_best_effort
 )
 from app.state import PlannerState
 
@@ -42,6 +47,10 @@ def create_planner_graph():
     builder.add_node("force_submit", force_submit)
     builder.add_node("critic", critic_node)
     builder.add_node("repair", repair_node)
+    builder.add_node("recovery", recovery_agent)
+    builder.add_node("prepare_replan", prepare_replan)
+    builder.add_node("ask_user", ask_user_from_recovery)
+    builder.add_node("best_effort", mark_best_effort)
 
     # --- intake ---
     builder.add_conditional_edges(START, route_initial_request)
@@ -84,9 +93,24 @@ def create_planner_graph():
         route_after_critic,
         {
             "finished": END,
-            "repair": "repair",
+            "recovery": "recovery",
         },
     )
+    builder.add_conditional_edges(
+        "recovery",
+        route_after_recovery,
+        {
+            "repair": "repair",
+            "replan": "prepare_replan",
+            "ask_user": "ask_user",
+            "best_effort": "best_effort",
+        },
+    )
+
+    builder.add_edge("repair", "critic")
+    builder.add_edge("prepare_replan", "planner_agent")
+    builder.add_edge("ask_user", END)
+    builder.add_edge("best_effort", END)
     builder.add_edge("repair", "critic")
 
     checkpointer = InMemorySaver()
