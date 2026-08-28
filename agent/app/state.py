@@ -1,6 +1,6 @@
 """Shared state for the Chicago Stroll planning workflow"""
-
-from typing import TypedDict, NotRequired
+from langgraph.graph.message import add_messages
+from typing import TypedDict, NotRequired, Annotated
 
 class PlannerState(TypedDict):
     """Information shared between every LangGraph node."""
@@ -14,3 +14,6 @@ class PlannerState(TypedDict):
     draft_itinerary: NotRequired[dict]
     critique_result: NotRequired[dict]
     repair_count: NotRequired[int]
+    messages: Annotated[list, add_messages]
+    planner_steps: NotRequired[int]
+    

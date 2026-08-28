@@ -6,17 +6,20 @@ from langgraph.graph import END, START, StateGraph
 from app.graph.router import (
     route_after_completeness,
     route_after_critic,
+    route_after_tools,
     route_initial_request,
+    route_planner_agent,
 )
 from app.nodes import (
     check_completeness,
     create_clarification,
     critic_node,
+    force_submit,
     parse_request,
-    planner_node,
+    planner_agent,
+    planner_tools,
     ready_for_research,
     repair_node,
-    retrieve_places_node,
     update_request,
 )
 from app.state import PlannerState
@@ -27,56 +30,47 @@ def create_planner_graph():
 
     builder = StateGraph(PlannerState)
 
+    # --- nodes ---
     builder.add_node("parse_request", parse_request)
     builder.add_node("update_request", update_request)
     builder.add_node("check_completeness", check_completeness)
     builder.add_node("create_clarification", create_clarification)
     builder.add_node("ready_for_research", ready_for_research)
-    builder.add_node("retrieve_places", retrieve_places_node)
-    builder.add_node("planner", planner_node)
+    builder.add_node("planner_agent", planner_agent)
+    builder.add_node("planner_tools", planner_tools)
+    builder.add_node("force_submit", force_submit)
     builder.add_node("critic", critic_node)
     builder.add_node("repair", repair_node)
 
+    # --- intake ---
+    builder.add_conditional_edges(START, route_initial_request)
+    builder.add_edge("parse_request", "check_completeness")
+    builder.add_edge("update_request", "check_completeness")
+    builder.add_conditional_edges("check_completeness", route_after_completeness)
+    builder.add_edge("create_clarification", END)
+
+    # --- agentic planning loop ---
+    builder.add_edge("ready_for_research", "planner_agent")
     builder.add_conditional_edges(
-        START,
-        route_initial_request,
+        "planner_agent",
+        route_planner_agent,
+        {
+            "planner_tools": "planner_tools",
+            "force_submit": "force_submit",
+            "planner_agent": "planner_agent",
+        },
     )
-
-    builder.add_edge(
-        "parse_request",
-        "check_completeness",
-    )
-
-    builder.add_edge(
-        "update_request",
-        "check_completeness",
-    )
-
     builder.add_conditional_edges(
-        "check_completeness",
-        route_after_completeness,
+        "planner_tools",
+        route_after_tools,
+        {
+            "critic": "critic",
+            "planner_agent": "planner_agent",
+        },
     )
+    builder.add_edge("force_submit", "critic")
 
-    builder.add_edge(
-        "create_clarification",
-        END,
-    )
-
-    builder.add_edge(
-        "ready_for_research",
-        "retrieve_places",
-    )
-
-    builder.add_edge(
-        "retrieve_places",
-        "planner",
-    )
-
-    builder.add_edge(
-        "planner",
-        "critic",
-    )
-
+    # --- critic / repair (unchanged) ---
     builder.add_conditional_edges(
         "critic",
         route_after_critic,
@@ -85,14 +79,8 @@ def create_planner_graph():
             "repair": "repair",
         },
     )
-
-    builder.add_edge(
-        "repair",
-        "critic",
-    )
+    builder.add_edge("repair", "critic")
 
     checkpointer = InMemorySaver()
 
-    return builder.compile(
-        checkpointer=checkpointer,
-    )
+    return builder.compile(checkpointer=checkpointer)

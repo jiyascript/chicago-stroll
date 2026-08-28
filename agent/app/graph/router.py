@@ -27,3 +27,17 @@ def route_after_critic(state: PlannerState):
         return "finished"
 
     return "repair"
+
+def route_planner_agent(state: PlannerState):
+    last = state["message"][-1]
+    if getattr(last, "tool_calls", None):
+        return "planner_tools"
+    if state.get("planner_steps", 0) >= 6:
+        return "force_submit"
+    return "planner_agent"
+
+def route_after_tools(state: PlannerState):
+    if state.get("draft_itinerary"):
+        return "critic"
+    else:
+        return "planner_agent"
