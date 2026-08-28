@@ -1,26 +1,22 @@
 [project]
 name = "chicago-stroll-agent"
-version = "0.1.0"
-description = "AI planning backend for Chicago Stroll"
+version = "2.0.0"
+description = "Bounded tool-calling Chicago itinerary agent"
 requires-python = ">=3.12,<3.15"
-
 dependencies = [
-    "fastapi",
-    "langchain",
-    "langchain-google-genai",
-    "langgraph",
-    "langsmith",
-    "python-dotenv",
-    "pydantic",
-    "httpx",
-    "google-genai",
-    "requests"
+  "fastapi>=0.115",
+  "httpx>=0.27",
+  "langchain>=1.0",
+  "langchain-google-genai>=4.0",
+  "langgraph>=1.0",
+  "langsmith>=0.4",
+  "pydantic>=2.10",
+  "python-dotenv>=1.0",
+  "uvicorn>=0.30",
 ]
 
 [project.optional-dependencies]
-dev = [
-    "pytest",
-]
+dev = ["pytest>=8"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -9,6 +9,7 @@ from app.graph.router import (
     route_after_tools,
     route_initial_request,
     route_planner_agent,
+    route_after_force_submit
 )
 from app.nodes import (
     check_completeness,
@@ -68,7 +69,14 @@ def create_planner_graph():
             "planner_agent": "planner_agent",
         },
     )
-    builder.add_edge("force_submit", "critic")
+    builder.add_conditional_edges(
+        "force_submit",
+        route_after_force_submit,
+        {
+            "critic": "critic",
+            "end": END,
+        },
+    )
 
     # --- critic / repair (unchanged) ---
     builder.add_conditional_edges(

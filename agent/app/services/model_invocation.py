@@ -1,73 +1,25 @@
-"""Reliable model invocation with retry and fallback."""
-
 from time import sleep
 from typing import Any
-from google.genai.errors import ClientError,ServerError
+try:
+    from google.genai.errors import ClientError, ServerError
+except Exception:  # import-safe for tests without SDK details
+    ClientError = ServerError = ()
 
+RETRYABLE_STATUS_CODES = {429, 503, 504}
 
-RETRYABLE_STATUS_CODES = {
-    429,
-    503,
-    504,
-}
+def is_retryable_error(error: Exception) -> bool:
+    if ClientError and isinstance(error, (ClientError, ServerError)):
+        code = getattr(error, "code", None) or getattr(error, "status_code", None)
+        return code in RETRYABLE_STATUS_CODES
+    return getattr(error, "status_code", None) in RETRYABLE_STATUS_CODES
 
-
-def is_retryable_error(error: Exception,) -> bool:
-    """Return whether a model error is transient."""
-
-    if not isinstance(
-        error,
-        (ClientError, ServerError),
-    ):
-        return False
-
-    status_code = getattr(
-        error,
-        "code",
-        None,
-    )
-
-    if status_code is None:
-        status_code = getattr(
-            error,
-            "status_code",
-            None,
-        )
-
-    return (
-        status_code
-        in RETRYABLE_STATUS_CODES
-    )
-
-
-def invoke_runnable_with_fallback(
-    primary,
-    fallback,
-    payload: Any,
-    max_retries: int = 2,
-):
-    """Retry primary model, then invoke fallback."""
-
-    last_error: Exception | None = None
-
+def invoke_runnable_with_fallback(primary, fallback, payload: Any, max_retries: int = 2):
     for attempt in range(max_retries + 1):
         try:
             return primary.invoke(payload)
-
         except Exception as error:
             if not is_retryable_error(error):
                 raise
-
-            last_error = error
-
             if attempt < max_retries:
                 sleep(1 + attempt)
-
-    try:
-        return fallback.invoke(payload)
-
-    except Exception:
-        if last_error is not None:
-            raise last_error
-
-        raise
+    return fallback.invoke(payload)

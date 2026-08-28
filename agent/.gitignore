@@ -1,16 +1,19 @@
 # Secrets
 .env
 .env.*
-# Keep the safe environment template
 !.env.example
 
 # Virtual environments
 .venv/
 venv/
 
+# Deployment
+.vercel/
+
 # Python-generated files
 __pycache__/
 *.py[cod]
+.pytest_cache/
 
 # macOS and editors
 .DS_Store
